@@ -29,7 +29,7 @@ body {
 
 /* encabezado fijo */
 .encabezado-frank {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     z-index: 1000;
@@ -45,10 +45,6 @@ body {
     text-transform: uppercase;
 }
 
-.encabezado-frank.encabezado-oculto {
-    opacity: 0;
-    transform: translatey(-100%); 
-}
 
 .barra-contenido {
     display: flex;
@@ -413,6 +409,9 @@ body {
     width: 100%; 
     margin-top: 10px;
 }
+
+
+
 
 /* footer */
 footer {
