@@ -1,0 +1,58 @@
+---
+import PageIntro from "../components/PageIntro.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Conoce el origen de Franksmind y conecta con el creador del proyecto."
+>
+  <PageIntro
+    eyebrow="Hablemos de música"
+    title="¿Qué canción te acompaña?"
+    description="Este sitio nació de una relación personal con la música. Si también tienes una historia que empezó con una canción, me encantará conocerla."
+  />
+
+  <section class="contact-panel shell">
+    <div class="contact-statement">
+      <p class="eyebrow eyebrow-light">Detrás del sitio</p>
+      <h2>Luis Eduardo<br />Barrón Álvarez</h2>
+      <p>
+        Diseñé y construí Franksmind como un archivo personal dedicado a la obra
+        de Frank Ocean y a los recuerdos que viven dentro de sus canciones.
+      </p>
+    </div>
+
+    <div class="contact-links" aria-label="Formas de contacto">
+      <a
+        href="https://github.com/eduardo-ba"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>
+          <small>Código y proyectos</small>
+          GitHub
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a
+        href="https://open.spotify.com/playlist/2iDpx90bonkWEaOvkVFpCl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>
+          <small>La inspiración del sitio</small>
+          Mi playlist
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href="/discografia">
+        <span>
+          <small>Continúa explorando</small>
+          Discografía
+        </span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

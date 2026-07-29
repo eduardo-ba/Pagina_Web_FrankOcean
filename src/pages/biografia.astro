@@ -1,0 +1,71 @@
+---
+import PageIntro from "../components/PageIntro.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const milestones = [
+  {
+    years: "1987—2005",
+    title: "Nueva Orleans y los primeros capítulos",
+    text: "Christopher Edwin Breaux creció en Nueva Orleans, rodeado por la tradición musical de la ciudad. Después del huracán Katrina, se trasladó a Los Ángeles para continuar grabando y perseguir una carrera en la música.",
+  },
+  {
+    years: "2008—2010",
+    title: "El compositor detrás de escena",
+    text: "Antes de ocupar el centro del escenario, escribió para otros artistas y desarrolló su propia voz. En Los Ángeles se acercó al colectivo Odd Future y firmó como solista con Def Jam.",
+  },
+  {
+    years: "2011",
+    title: "Nostalgia, Ultra",
+    text: "Publicó gratuitamente el mixtape que cambió el rumbo de su carrera. Su forma de mezclar confesión, ficción y cultura popular capturó la atención de la crítica y de una nueva generación de oyentes.",
+  },
+  {
+    years: "2012",
+    title: "Channel Orange",
+    text: "Su debut de estudio convirtió historias sobre deseo, privilegio y soledad en escenas de gran precisión. El proyecto obtuvo reconocimiento internacional y el Grammy a mejor álbum urbano contemporáneo.",
+  },
+  {
+    years: "2016",
+    title: "Endless y Blonde",
+    text: "En días consecutivos presentó un álbum visual y una obra todavía más íntima. Blonde rompió estructuras tradicionales de la canción y consolidó su independencia creativa.",
+  },
+];
+---
+
+<BaseLayout
+  title="Biografía"
+  description="Un recorrido por los momentos decisivos en la vida y la carrera artística de Frank Ocean."
+>
+  <PageIntro
+    eyebrow="Christopher Francis Ocean"
+    title="Una voz fuera del tiempo"
+    description="De Nueva Orleans a una independencia creativa casi absoluta: cinco momentos para entender su recorrido."
+  />
+
+  <section class="bio-layout shell">
+    <aside class="bio-aside">
+      <img
+        src="/imagenes/frank-ocean.jpg"
+        alt="Retrato de Frank Ocean"
+        width="474"
+        height="479"
+      />
+      <p>
+        Cantante<br />Compositor<br />Productor
+      </p>
+    </aside>
+
+    <ol class="timeline">
+      {
+        milestones.map(({ years, title, text }) => (
+          <li class="timeline-item">
+            <p class="timeline-year">{years}</p>
+            <div>
+              <h2>{title}</h2>
+              <p>{text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import AlbumCard from "../components/AlbumCard.astro";
+import PageIntro from "../components/PageIntro.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { albums } from "../data/albums";
+---
+
+<BaseLayout
+  title="Discografía"
+  description="Álbumes, mixtapes, proyectos y una selección personal de la música de Frank Ocean."
+>
+  <PageIntro
+    eyebrow="El archivo sonoro"
+    title="Discografía"
+    description="Una obra breve en cantidad, inmensa en influencia. Explora los proyectos que construyeron el universo de Frank Ocean."
+  />
+
+  <section class="shell album-grid" aria-label="Proyectos de Frank Ocean">
+    {albums.map((album, index) => <AlbumCard album={album} index={index} />)}
+  </section>
+</BaseLayout>

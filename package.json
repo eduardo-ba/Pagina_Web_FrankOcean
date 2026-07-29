@@ -1,0 +1,39 @@
+{
+  "name": "pagina_web_frankocean",
+  "version": "1.0.0",
+  "description": "Un archivo personal dedicado a la música y la historia de Frank Ocean.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "verify": "npm run format:check && npm run check && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardo-ba/Pagina_Web_FrankOcean.git"
+  },
+  "keywords": [
+    "astro",
+    "frank-ocean",
+    "discografia"
+  ],
+  "author": "Luis Eduardo Barrón Álvarez",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/eduardo-ba/Pagina_Web_FrankOcean/issues"
+  },
+  "homepage": "https://github.com/eduardo-ba/Pagina_Web_FrankOcean#readme",
+  "dependencies": {
+    "astro": "^7.1.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "prettier": "3.9.6",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript": "6.0.3"
+  }
+}

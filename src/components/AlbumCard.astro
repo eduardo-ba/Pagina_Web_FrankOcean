@@ -1,0 +1,44 @@
+---
+import type { Album } from "../data/albums";
+
+interface Props {
+  album: Album;
+  index: number;
+}
+
+const { album, index } = Astro.props;
+---
+
+<article class="album-card" style={`--album-accent: ${album.accent}`}>
+  <div class="album-art-wrap">
+    <span class="album-index" aria-hidden="true"
+      >{String(index + 1).padStart(2, "0")}</span
+    >
+    <img
+      class="album-art"
+      src={album.image}
+      alt={album.alt}
+      width="900"
+      height="900"
+      loading={index < 2 ? "eager" : "lazy"}
+      decoding="async"
+    />
+  </div>
+  <div class="album-body">
+    <div class="album-meta">
+      <span>{album.category}</span>
+      <span>{album.year}</span>
+    </div>
+    <h2>{album.title}</h2>
+    <p>{album.description}</p>
+    <a
+      class="album-link"
+      href={album.url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Abrir en {album.platform}
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>
