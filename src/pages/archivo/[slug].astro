@@ -59,7 +59,9 @@ const metaKey = ("era-" + era.slug) as EraMetaKey;
           alt={translations.es[eraKey + ".alt"]}
           data-i18n-alt={eraKey + ".alt"}
           widths={[480, 768, 1080, 1600]}
-          sizes="(min-width: 900px) 48vw, 88vw"
+          sizes={era.slug === "endless"
+            ? "(min-width: 900px) 48vw, 76vw"
+            : "(min-width: 900px) 48vw, 88vw"}
           loading="eager"
           fetchpriority="high"
         />

@@ -586,6 +586,7 @@
   --listening-bg: var(--paper);
   --listening-ink: var(--black);
   --listening-accent: var(--green);
+  --listening-selected-ink: var(--black);
   display: grid;
   grid-template-columns: 0.7fr 1.3fr;
   gap: clamp(3rem, 8vw, 9rem);
@@ -601,6 +602,7 @@
   --listening-bg: var(--red);
   --listening-ink: var(--ivory);
   --listening-accent: var(--black);
+  --listening-selected-ink: var(--ivory);
 }
 
 .listening-desk[data-mode="orange"] {
@@ -663,7 +665,7 @@
 
 .listening-desk__controls button[aria-pressed="true"] {
   background: var(--listening-accent);
-  color: var(--black);
+  color: var(--listening-selected-ink);
 }
 
 .listening-desk__controls button > span {
@@ -943,6 +945,18 @@
 
   .era-record__image {
     order: 1;
+  }
+
+  .era-record[data-era="endless"] .era-record__image {
+    width: min(76vw, 32rem);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .era-record[data-era="endless"] .era-record__image img {
+    height: 100%;
+    aspect-ratio: auto;
+    object-position: center 46%;
   }
 
   .era-record__field-note {
