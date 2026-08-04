@@ -20,9 +20,17 @@ const year = new Date().getFullYear();
       <p class="archive-label" data-i18n="credits.authorLabel">
         {translations.es["credits.authorLabel"]}
       </p>
-      <h2>Luis Eduardo<br />Barrón Álvarez</h2>
-      <p data-i18n="credits.authorBody">
+      <h2 data-i18n="credits.authorTitle">
+        {translations.es["credits.authorTitle"]}
+      </h2>
+      <p class="credits-author__statement" data-i18n="credits.authorBody">
         {translations.es["credits.authorBody"]}
+      </p>
+      <p class="credits-author__byline">
+        <span data-i18n="credits.byline"
+          >{translations.es["credits.byline"]}</span
+        >
+        / Luis Eduardo Barrón Álvarez
       </p>
     </article>
 

@@ -37,6 +37,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "home.editionTopics": "Memoria / sonido / imagen",
     "home.open": "Abrir archivo",
     "home.editorNote": "Nota del editor / 001",
+    "home.archiveSignature": "BVA / Archivo personal",
     "home.manifestoQuote":
       "Un registro de las canciones que dieron forma al tiempo, y de los recuerdos que ahora viven dentro de ellas.",
     "home.manifestoBody":
@@ -131,8 +132,10 @@ export const translations: Record<Language, Record<string, string>> = {
     "credits.introEyebrow": "Notas del archivo / edición 01",
     "credits.introTitle": "Créditos, contexto y cuidado.",
     "credits.introDescription":
-      "Una colección construida desde la escucha personal. Código, selección y dirección visual por Luis Eduardo Barrón Álvarez.",
+      "Una colección construida desde la escucha personal. Código, selección y dirección visual reunidos en una edición independiente.",
     "credits.authorLabel": "Editor / diseñador / desarrollo",
+    "credits.authorTitle": "Edición independiente.",
+    "credits.byline": "Edición y desarrollo",
     "credits.authorBody":
       "El archivo reúne proyectos, imágenes y recuerdos alrededor de la música de Frank Ocean. Su intención es cultural y personal: ordenar una relación con las canciones, no representar al artista.",
     "credits.linksAria": "Enlaces del proyecto",
@@ -150,7 +153,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "credits.rightsBody":
       "Las imágenes, portadas, música y nombres pertenecen a sus respectivos titulares. Se muestran aquí con propósito editorial dentro de un proyecto personal.",
     "credits.editionLabel": "Edición",
-    "credits.location": "01 / Chihuahua, México",
+    "credits.location": "01 / Mazatlán, México",
   },
   en: {
     "brand.name": "Blonded Visual Archive",
@@ -188,6 +191,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "home.editionTopics": "Memory / sound / image",
     "home.open": "Open archive",
     "home.editorNote": "Editor's note / 001",
+    "home.archiveSignature": "BVA / Personal archive",
     "home.manifestoQuote":
       "A record of the songs that shaped time, and of the memories that now live inside them.",
     "home.manifestoBody":
@@ -281,8 +285,10 @@ export const translations: Record<Language, Record<string, string>> = {
     "credits.introEyebrow": "Archive notes / edition 01",
     "credits.introTitle": "Credits, context & care.",
     "credits.introDescription":
-      "A collection built through personal listening. Code, selection, and visual direction by Luis Eduardo Barrón Álvarez.",
+      "A collection built through personal listening. Code, selection, and visual direction gathered in an independent edition.",
     "credits.authorLabel": "Editor / designer / development",
+    "credits.authorTitle": "Independent edition.",
+    "credits.byline": "Editing and development",
     "credits.authorBody":
       "The archive gathers projects, images, and memories around Frank Ocean's music. Its intent is cultural and personal: to organize a relationship with the songs, not to represent the artist.",
     "credits.linksAria": "Project links",
@@ -300,6 +306,6 @@ export const translations: Record<Language, Record<string, string>> = {
     "credits.rightsBody":
       "Images, covers, music, and names belong to their respective rights holders. They appear here for editorial purposes within a personal project.",
     "credits.editionLabel": "Edition",
-    "credits.location": "01 / Chihuahua, Mexico",
+    "credits.location": "01 / Mazatlán, Mexico",
   },
 };
