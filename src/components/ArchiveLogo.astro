@@ -1,0 +1,33 @@
+---
+import { translations } from "../data/i18n";
+
+interface Props {
+  showName?: boolean;
+  class?: string;
+}
+
+const { showName = true, class: className } = Astro.props;
+---
+
+<span class:list={["archive-logo", className]}>
+  <svg
+    class="archive-logo__mark"
+    viewBox="0 0 48 48"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      class="archive-logo__corners"
+      d="M17 5H5v12M31 5h12v12M43 31v12H31M17 43H5V31"></path>
+    <path class="archive-logo__signal" d="m13 13 11 11 11-11M13 35l11-11 11 11"
+    ></path>
+    <circle class="archive-logo__point" cx="24" cy="24" r="2.75"></circle>
+  </svg>
+  {
+    showName && (
+      <span class="archive-logo__name" data-i18n="brand.name">
+        {translations.es["brand.name"]}
+      </span>
+    )
+  }
+</span>

@@ -1,0 +1,211 @@
+---
+import { Image } from "astro:assets";
+import type { ArchiveEra } from "../../data/albums";
+import { archiveEras } from "../../data/albums";
+import type { EraDetail } from "../../data/archive-content";
+import { eraDetails, singles } from "../../data/archive-content";
+import { translations } from "../../data/i18n";
+import MediaFigure from "../../components/MediaFigure.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return archiveEras.map((era, index) => ({
+    params: { slug: era.slug },
+    props: {
+      era,
+      detail: eraDetails.find((entry) => entry.slug === era.slug),
+      index,
+      nextEra: archiveEras[(index + 1) % archiveEras.length],
+    },
+  }));
+}
+
+interface Props {
+  era: ArchiveEra;
+  detail: EraDetail;
+  index: number;
+  nextEra: ArchiveEra;
+}
+
+type EraMetaKey =
+  | "era-nostalgia-ultra"
+  | "era-channel-orange"
+  | "era-endless"
+  | "era-blonde"
+  | "era-singles";
+
+const { era, detail, index, nextEra } = Astro.props as Props;
+const eraKey = "era." + era.slug;
+const nextEraKey = "era." + nextEra.slug + ".title";
+const metaKey = ("era-" + era.slug) as EraMetaKey;
+---
+
+<BaseLayout
+  metaKey={metaKey}
+  socialImage={"/social/" + era.slug + "-og.jpg"}
+  pageTheme={era.theme === "singles" ? "black" : "paper"}
+>
+  <article class="era-record" data-era={era.theme}>
+    <header class="era-record__hero">
+      <div class="era-record__index">
+        <span>{String(index + 1).padStart(2, "0")} / 05</span>
+        <a href="/discografia" data-i18n="eraDetail.back">
+          {translations.es["eraDetail.back"]}
+        </a>
+      </div>
+      <div class="era-record__image">
+        <Image
+          src={era.cover}
+          alt={translations.es[eraKey + ".alt"]}
+          data-i18n-alt={eraKey + ".alt"}
+          widths={[480, 768, 1080, 1600]}
+          sizes="(min-width: 900px) 48vw, 88vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="era-record__title">
+        <p class="archive-label" data-i18n={eraKey + ".category"}>
+          {translations.es[eraKey + ".category"]}
+        </p>
+        <h1 data-i18n={eraKey + ".title"}>
+          {translations.es[eraKey + ".title"]}
+        </h1>
+        <p>{era.year}</p>
+      </div>
+      <p
+        class="era-record__thesis"
+        data-copy-es={detail.thesis.es}
+        data-copy-en={detail.thesis.en}
+      >
+        {detail.thesis.es}
+      </p>
+    </header>
+
+    {
+      era.supportImage && (
+        <section
+          class="era-record__field-note reveal"
+          data-aspect={era.supportImage.aspect}
+        >
+          <MediaFigure
+            src={era.supportImage.src}
+            altKey={era.supportImage.altKey}
+            captionKey={era.supportImage.captionKey}
+            sizes="(min-width: 900px) 82vw, 100vw"
+          />
+          <p class="archive-label" data-i18n="eraDetail.fieldNote">
+            {translations.es["eraDetail.fieldNote"]}
+          </p>
+        </section>
+      )
+    }
+
+    <section class="era-reading reveal">
+      <p class="archive-label" data-i18n="eraDetail.contextLabel">
+        {translations.es["eraDetail.contextLabel"]}
+      </p>
+      <p data-copy-es={detail.context.es} data-copy-en={detail.context.en}>
+        {detail.context.es}
+      </p>
+    </section>
+
+    <section class="era-tracklist reveal" aria-labelledby="track-index-title">
+      <header>
+        <p class="archive-label" data-i18n="common.trackIndex">
+          {translations.es["common.trackIndex"]}
+        </p>
+        <h2 id="track-index-title">{era.featuredTrack}</h2>
+      </header>
+      <ol>
+        {
+          detail.tracks.map((track, trackIndex) => (
+            <li>
+              <span>{String(trackIndex + 1).padStart(2, "0")}</span>
+              <strong>{track}</strong>
+              <a
+                href={
+                  "https://music.apple.com/us/search?term=" +
+                  encodeURIComponent("Frank Ocean " + track)
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span data-i18n="common.listen">
+                  {translations.es["common.listen"]}
+                </span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="era-emotions reveal">
+      <p class="archive-label" data-i18n="common.emotionalTags">
+        {translations.es["common.emotionalTags"]}
+      </p>
+      <ul>
+        {
+          detail.emotions.map((emotion) => (
+            <li data-copy-es={emotion.es} data-copy-en={emotion.en}>
+              {emotion.es}
+            </li>
+          ))
+        }
+      </ul>
+      <details>
+        <summary data-i18n="common.privateNote">
+          {translations.es["common.privateNote"]}
+        </summary>
+        <p data-copy-es={detail.note.es} data-copy-en={detail.note.en}>
+          {detail.note.es}
+        </p>
+      </details>
+    </section>
+
+    {
+      era.slug === "singles" && (
+        <section class="singles-ledger reveal">
+          <p class="archive-label" data-i18n="eraDetail.singlesLabel">
+            {translations.es["eraDetail.singlesLabel"]}
+          </p>
+          <ol>
+            {singles.map((single, singleIndex) => (
+              <li>
+                <span>{String(singleIndex + 1).padStart(2, "0")}</span>
+                <strong>{single.title}</strong>
+                <span>{single.year}</span>
+                <span
+                  data-copy-es={single.tone.es}
+                  data-copy-en={single.tone.en}
+                >
+                  {single.tone.es}
+                </span>
+                <a
+                  href={single.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={single.title}
+                >
+                  ↗
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+
+    <footer class="era-record__next">
+      <p class="archive-label" data-i18n="common.nextRecord">
+        {translations.es["common.nextRecord"]}
+      </p>
+      <a href={"/archivo/" + nextEra.slug}>
+        <span data-i18n={nextEraKey}>{translations.es[nextEraKey]}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </footer>
+  </article>
+</BaseLayout>

@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import EditorialIntro from "../components/EditorialIntro.astro";
+import { archiveObjects } from "../data/archive-content";
+import { translations } from "../data/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout metaKey="objects">
+  <EditorialIntro
+    indexKey="objects.introIndex"
+    eyebrowKey="objects.introEyebrow"
+    titleKey="objects.introTitle"
+    descriptionKey="objects.introDescription"
+  />
+
+  <section
+    class="object-collection"
+    aria-label={translations.es["objects.collectionAria"]}
+    data-i18n-aria-label="objects.collectionAria"
+  >
+    {
+      archiveObjects.map((object, index) => (
+        <article
+          id={object.id.toLowerCase()}
+          class="archive-object reveal"
+          data-aspect={object.aspect}
+        >
+          <div class="archive-object__image">
+            <Image
+              src={object.image}
+              alt={object.alt.es}
+              data-copy-alt-es={object.alt.es}
+              data-copy-alt-en={object.alt.en}
+              widths={[480, 768, 1080]}
+              sizes="(min-width: 900px) 38vw, 88vw"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="archive-object__copy">
+            <p class="archive-label">
+              {object.id} / {object.year}
+            </p>
+            <h2>{object.title}</h2>
+            <p data-copy-es={object.kind.es} data-copy-en={object.kind.en}>
+              {object.kind.es}
+            </p>
+            <p
+              data-copy-es={object.description.es}
+              data-copy-en={object.description.en}
+            >
+              {object.description.es}
+            </p>
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

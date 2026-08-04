@@ -1,0 +1,438 @@
+---
+import EditorialIntro from "../components/EditorialIntro.astro";
+import { archiveEras } from "../data/albums";
+import {
+  archiveObjects,
+  emotionalIndex,
+  eraDetails,
+  radioEpisodes,
+  randomTransmissions,
+  singles,
+} from "../data/archive-content";
+import { translations } from "../data/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const searchEntries = [
+  ...archiveEras.map((era) => ({
+    title: translations.es["era." + era.slug + ".title"],
+    titleEn: translations.en["era." + era.slug + ".title"],
+    metaEs: translations.es["era." + era.slug + ".category"] + " / " + era.year,
+    metaEn: translations.en["era." + era.slug + ".category"] + " / " + era.year,
+    searchEs:
+      translations.es["era." + era.slug + ".title"] +
+      " " +
+      translations.es["era." + era.slug + ".description"] +
+      " " +
+      eraDetails
+        .find((entry) => entry.slug === era.slug)
+        ?.emotions.map((emotion) => emotion.es)
+        .join(" "),
+    searchEn:
+      translations.en["era." + era.slug + ".title"] +
+      " " +
+      translations.en["era." + era.slug + ".description"] +
+      " " +
+      eraDetails
+        .find((entry) => entry.slug === era.slug)
+        ?.emotions.map((emotion) => emotion.en)
+        .join(" "),
+    href: "/archivo/" + era.slug,
+    code: "ERA",
+  })),
+  ...singles.map((single) => ({
+    title: single.title,
+    titleEn: single.title,
+    metaEs: single.year + " / " + single.tone.es,
+    metaEn: single.year + " / " + single.tone.en,
+    searchEs: single.title + " " + single.year + " " + single.tone.es,
+    searchEn: single.title + " " + single.year + " " + single.tone.en,
+    href: "/archivo/singles",
+    code: "SGL",
+  })),
+  ...radioEpisodes.map((episode) => ({
+    title: episode.title,
+    titleEn: episode.title,
+    metaEs: episode.cycle + " / " + episode.note.es,
+    metaEn: episode.cycle + " / " + episode.note.en,
+    searchEs: episode.title + " radio " + episode.note.es,
+    searchEn: episode.title + " radio " + episode.note.en,
+    href: "/radio#blonded-" + episode.code.toLowerCase(),
+    code: "RAD",
+  })),
+  ...archiveObjects.map((object) => ({
+    title: object.title,
+    titleEn: object.title,
+    metaEs: object.id + " / " + object.kind.es,
+    metaEn: object.id + " / " + object.kind.en,
+    searchEs: object.title + " " + object.year + " " + object.description.es,
+    searchEn: object.title + " " + object.year + " " + object.description.en,
+    href: "/objetos#" + object.id.toLowerCase(),
+    code: "OBJ",
+  })),
+];
+
+const listeningSelections = [
+  {
+    title: "Novacane",
+    era: "Nostalgia, Ultra",
+    theme: "nostalgia",
+    href: "https://music.apple.com/us/search?term=Frank%20Ocean%20Novacane",
+  },
+  {
+    title: "Pyramids",
+    era: "Channel Orange",
+    theme: "orange",
+    href: "https://music.apple.com/us/search?term=Frank%20Ocean%20Pyramids",
+  },
+  {
+    title: "Rushes",
+    era: "Endless",
+    theme: "endless",
+    href: "https://music.apple.com/us/search?term=Frank%20Ocean%20Rushes",
+  },
+  {
+    title: "Nights",
+    era: "Blonde",
+    theme: "blonde",
+    href: "https://music.apple.com/us/search?term=Frank%20Ocean%20Nights",
+  },
+  {
+    title: "DHL",
+    era: "Signals",
+    theme: "singles",
+    href: "https://music.apple.com/us/search?term=Frank%20Ocean%20DHL",
+  },
+];
+
+const personalNotes = [
+  {
+    code: "N-01",
+    title: { es: "Volver", en: "Returning" },
+    body: {
+      es: "Este archivo no intenta congelar las canciones. Registra la manera en que cambian cuando uno vuelve a ellas.",
+      en: "This archive does not try to freeze the songs. It records how they change when someone returns to them.",
+    },
+  },
+  {
+    code: "N-02",
+    title: { es: "Esperar", en: "Waiting" },
+    body: {
+      es: "Los espacios entre lanzamientos también forman parte de la obra: obligan a escuchar hacia atrás y a notar otros detalles.",
+      en: "The spaces between releases are also part of the work: they force us to listen backward and notice different details.",
+    },
+  },
+  {
+    code: "N-03",
+    title: { es: "Archivar", en: "Archiving" },
+    body: {
+      es: "Coleccionar no significa poseer. Aquí significa cuidar enlaces, imágenes, recuerdos y atribuciones.",
+      en: "Collecting does not mean owning. Here it means caring for links, images, memories, and attributions.",
+    },
+  },
+];
+---
+
+<BaseLayout metaKey="explore">
+  <EditorialIntro
+    indexKey="explore.introIndex"
+    eyebrowKey="explore.introEyebrow"
+    titleKey="explore.introTitle"
+    descriptionKey="explore.introDescription"
+  />
+
+  <nav
+    class="explore-portals"
+    aria-label={translations.es["explore.roomsAria"]}
+    data-i18n-aria-label="explore.roomsAria"
+  >
+    <a href="/radio"
+      ><span>01</span><strong>blonded RADIO</strong><span>→</span></a
+    >
+    <a href="/objetos"
+      ><span>02</span><strong>OBJ / OBJECTS</strong><span>→</span></a
+    >
+    <a href="/ediciones"
+      ><span>03</span><strong>ED / EDITIONS</strong><span>→</span></a
+    >
+  </nav>
+
+  <section class="archive-search" aria-labelledby="archive-search-title">
+    <div>
+      <p class="archive-label" data-i18n="explore.searchLabel">
+        {translations.es["explore.searchLabel"]}
+      </p>
+      <h2 id="archive-search-title">INDEX / {searchEntries.length}</h2>
+      <p data-i18n="explore.searchHint">
+        {translations.es["explore.searchHint"]}
+      </p>
+    </div>
+    <div class="archive-search__field">
+      <label
+        class="archive-label"
+        for="archive-query"
+        data-i18n="explore.searchLabel"
+      >
+        {translations.es["explore.searchLabel"]}
+      </label>
+      <input
+        id="archive-query"
+        type="search"
+        autocomplete="off"
+        placeholder={translations.es["explore.searchPlaceholder"]}
+        data-i18n-placeholder="explore.searchPlaceholder"
+      />
+    </div>
+    <ol class="archive-search__results">
+      {
+        searchEntries.map((entry, index) => (
+          <li
+            class="search-entry"
+            data-search-es={entry.searchEs.toLocaleLowerCase("es")}
+            data-search-en={entry.searchEn.toLocaleLowerCase("en")}
+          >
+            <a href={entry.href}>
+              <span>
+                {entry.code}-{String(index + 1).padStart(3, "0")}
+              </span>
+              <strong data-copy-es={entry.title} data-copy-en={entry.titleEn}>
+                {entry.title}
+              </strong>
+              <span data-copy-es={entry.metaEs} data-copy-en={entry.metaEn}>
+                {entry.metaEs}
+              </span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="archive-search__empty" hidden data-i18n="explore.noResults">
+      {translations.es["explore.noResults"]}
+    </p>
+  </section>
+
+  <section class="random-transmission">
+    <p class="archive-label" data-i18n="explore.randomLabel">
+      {translations.es["explore.randomLabel"]}
+    </p>
+    <h2 data-i18n="explore.randomTitle">
+      {translations.es["explore.randomTitle"]}
+    </h2>
+    <p data-i18n="explore.randomBody">
+      {translations.es["explore.randomBody"]}
+    </p>
+    <button
+      type="button"
+      data-random-transmission
+      data-targets={JSON.stringify(randomTransmissions)}
+    >
+      <span data-i18n="explore.randomButton">
+        {translations.es["explore.randomButton"]}
+      </span>
+      <span aria-hidden="true">↗</span>
+    </button>
+  </section>
+
+  <section class="emotional-index" aria-labelledby="emotion-title">
+    <header>
+      <p class="archive-label" data-i18n="explore.emotionLabel">
+        {translations.es["explore.emotionLabel"]}
+      </p>
+      <h2 id="emotion-title" data-i18n="explore.emotionTitle">
+        {translations.es["explore.emotionTitle"]}
+      </h2>
+    </header>
+    <div>
+      {
+        emotionalIndex.map((emotion, index) => (
+          <article id={emotion.slug} class="emotion-entry reveal">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3 data-copy-es={emotion.label.es} data-copy-en={emotion.label.en}>
+              {emotion.label.es}
+            </h3>
+            <p
+              data-copy-es={emotion.description.es}
+              data-copy-en={emotion.description.en}
+            >
+              {emotion.description.es}
+            </p>
+            <p>{emotion.entries.join(" / ")}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="listening-desk" data-listening-desk data-mode="blonde">
+    <header>
+      <p class="archive-label" data-i18n="explore.listeningLabel">
+        {translations.es["explore.listeningLabel"]}
+      </p>
+      <h2 data-i18n="explore.listeningTitle">
+        {translations.es["explore.listeningTitle"]}
+      </h2>
+      <p data-i18n="explore.listeningBody">
+        {translations.es["explore.listeningBody"]}
+      </p>
+    </header>
+    <div class="listening-desk__controls">
+      {
+        listeningSelections.map((selection, index) => (
+          <button
+            type="button"
+            data-listening-option
+            data-theme={selection.theme}
+            data-title={selection.title}
+            data-era={selection.era}
+            data-href={selection.href}
+            aria-pressed={index === 3 ? "true" : "false"}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{selection.title}</strong>
+            <span>{selection.era}</span>
+          </button>
+        ))
+      }
+    </div>
+    <div class="listening-desk__status" aria-live="polite">
+      <span data-i18n="explore.listeningActive">
+        {translations.es["explore.listeningActive"]}
+      </span>
+      <strong data-listening-status>Nights / Blonde</strong>
+      <a
+        data-listening-link
+        href={listeningSelections[3].href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span data-i18n="explore.listenExternal">
+          {translations.es["explore.listenExternal"]}
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="personal-notes">
+    <header>
+      <p class="archive-label" data-i18n="explore.notesLabel">
+        {translations.es["explore.notesLabel"]}
+      </p>
+      <h2 data-i18n="explore.notesTitle">
+        {translations.es["explore.notesTitle"]}
+      </h2>
+    </header>
+    <div>
+      {
+        personalNotes.map((note) => (
+          <details>
+            <summary>
+              <span>{note.code}</span>
+              <strong data-copy-es={note.title.es} data-copy-en={note.title.en}>
+                {note.title.es}
+              </strong>
+            </summary>
+            <p data-copy-es={note.body.es} data-copy-en={note.body.en}>
+              {note.body.es}
+            </p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <script>
+    const queryInput =
+      document.querySelector<HTMLInputElement>("#archive-query");
+    const searchEntries =
+      document.querySelectorAll<HTMLElement>(".search-entry");
+    const emptyMessage = document.querySelector<HTMLElement>(
+      ".archive-search__empty",
+    );
+
+    const normalize = (value: string) =>
+      value
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLocaleLowerCase();
+
+    const updateSearch = () => {
+      const query = normalize(queryInput?.value.trim() ?? "");
+      const language =
+        document.documentElement.dataset.language === "en" ? "en" : "es";
+      let visible = 0;
+
+      searchEntries.forEach((entry) => {
+        const haystack = normalize(
+          language === "en"
+            ? (entry.dataset.searchEn ?? "")
+            : (entry.dataset.searchEs ?? ""),
+        );
+        const matches = !query || haystack.includes(query);
+        entry.hidden = !matches;
+        if (matches) visible += 1;
+      });
+
+      if (emptyMessage) emptyMessage.hidden = visible !== 0;
+    };
+
+    queryInput?.addEventListener("input", updateSearch);
+    window.addEventListener("bva:languagechange", updateSearch);
+
+    const randomButton = document.querySelector<HTMLButtonElement>(
+      "[data-random-transmission]",
+    );
+    randomButton?.addEventListener("click", () => {
+      const targets = JSON.parse(
+        randomButton.dataset.targets ?? "[]",
+      ) as string[];
+      if (!targets.length) return;
+      const previous = sessionStorage.getItem("bva-random-target");
+      const available = targets.filter((target) => target !== previous);
+      const pool = available.length ? available : targets;
+      const target = pool[Math.floor(Math.random() * pool.length)];
+      sessionStorage.setItem("bva-random-target", target);
+      window.location.assign(target);
+    });
+
+    const listeningDesk = document.querySelector<HTMLElement>(
+      "[data-listening-desk]",
+    );
+    const listeningButtons = document.querySelectorAll<HTMLButtonElement>(
+      "[data-listening-option]",
+    );
+    const listeningStatus = document.querySelector<HTMLElement>(
+      "[data-listening-status]",
+    );
+    const listeningLink = document.querySelector<HTMLAnchorElement>(
+      "[data-listening-link]",
+    );
+
+    const activateListeningMode = (button: HTMLButtonElement) => {
+      listeningButtons.forEach((option) => {
+        option.setAttribute("aria-pressed", String(option === button));
+      });
+      if (listeningDesk) listeningDesk.dataset.mode = button.dataset.theme;
+      if (listeningStatus) {
+        listeningStatus.textContent =
+          button.dataset.title + " / " + button.dataset.era;
+      }
+      if (listeningLink && button.dataset.href) {
+        listeningLink.href = button.dataset.href;
+      }
+      if (button.dataset.theme) {
+        sessionStorage.setItem("bva-listening-mode", button.dataset.theme);
+      }
+    };
+
+    listeningButtons.forEach((button) => {
+      button.addEventListener("click", () => activateListeningMode(button));
+    });
+
+    const savedMode = sessionStorage.getItem("bva-listening-mode");
+    const savedButton = Array.from(listeningButtons).find(
+      (button) => button.dataset.theme === savedMode,
+    );
+    if (savedButton) activateListeningMode(savedButton);
+  </script>
+</BaseLayout>

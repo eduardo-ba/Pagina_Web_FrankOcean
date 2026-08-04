@@ -21,7 +21,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     data-i18n-aria-label="history.portraitAria"
   >
     <Image
-      src={archiveMedia.portrait}
+      src={archiveMedia.wirelessPortrait2013}
       alt={translations.es["history.portraitAlt"]}
       data-i18n-alt="history.portraitAlt"
       widths={[474, 768, 960]}
@@ -83,11 +83,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </p>
             {index === 2 && (
               <MediaFigure
-                src={archiveMedia.playlist}
-                altKey="history.playlistAlt"
-                captionKey="history.playlistCaption"
-                class="history-entry__media history-entry__media--small"
-                sizes="(min-width: 900px) 28vw, 72vw"
+                src={archiveMedia.listeningEvent2011}
+                altKey="history.listening2011Alt"
+                captionKey="history.listening2011Caption"
+                class="history-entry__media history-entry__media--document"
+                sizes="(min-width: 900px) 48vw, 100vw"
               />
             )}
             {index === 4 && (
@@ -106,6 +106,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 captionKey="history.coachellaCaption"
                 class="history-entry__media history-entry__media--stage"
                 sizes="(min-width: 900px) 48vw, 100vw"
+              />
+            )}
+            {yearKey === "2013" && (
+              <MediaFigure
+                src={archiveMedia.wirelessWide2013}
+                altKey="history.wirelessWideAlt"
+                captionKey="history.wirelessWideCaption"
+                class="history-entry__media history-entry__media--panorama history-entry__media--wireless-wide"
+                sizes="(min-width: 900px) 72vw, 100vw"
               />
             )}
             {yearKey === "2017" && (

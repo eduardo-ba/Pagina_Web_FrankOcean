@@ -1,0 +1,70 @@
+---
+import EditorialIntro from "../components/EditorialIntro.astro";
+import { radioEpisodes } from "../data/archive-content";
+import { translations } from "../data/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout metaKey="radio" pageTheme="black">
+  <EditorialIntro
+    indexKey="radio.introIndex"
+    eyebrowKey="radio.introEyebrow"
+    titleKey="radio.introTitle"
+    descriptionKey="radio.introDescription"
+    variant="dark"
+  />
+
+  <section
+    class="radio-ledger"
+    aria-label={translations.es["radio.sequenceAria"]}
+    data-i18n-aria-label="radio.sequenceAria"
+  >
+    {
+      radioEpisodes.map((episode, index) => (
+        <article
+          id={"blonded-" + episode.code.toLowerCase()}
+          class="radio-entry reveal"
+        >
+          <div class="radio-entry__code" aria-hidden="true">
+            {episode.code}
+          </div>
+          <p class="archive-label">{episode.cycle}</p>
+          <h2>{episode.title}</h2>
+          <p data-copy-es={episode.note.es} data-copy-en={episode.note.en}>
+            {episode.note.es}
+          </p>
+          <a
+            class="archive-link archive-link--light"
+            href={episode.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span data-i18n="radio.openEpisode">
+              {translations.es["radio.openEpisode"]}
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <span class="radio-entry__position">
+            {String(index + 1).padStart(2, "0")} /{" "}
+            {String(radioEpisodes.length).padStart(2, "0")}
+          </span>
+        </article>
+      ))
+    }
+  </section>
+
+  <aside class="radio-source-note">
+    <p data-i18n="radio.sourceNote">{translations.es["radio.sourceNote"]}</p>
+    <a
+      class="archive-link"
+      href="https://music.apple.com/us/curator/blonded-radio/1082541771"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span data-i18n="common.officialSource">
+        {translations.es["common.officialSource"]}
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </aside>
+</BaseLayout>

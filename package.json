@@ -9,6 +9,7 @@
     "check": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "social": "node scripts/generate-social-cards.mjs",
     "verify": "npm run format:check && npm run check && npm run build"
   },
   "repository": {

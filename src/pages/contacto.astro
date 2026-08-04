@@ -1,6 +1,6 @@
 ---
 import EditorialIntro from "../components/EditorialIntro.astro";
-import { photoCredits } from "../data/albums";
+import { factualSources, photoCredits } from "../data/albums";
 import { translations } from "../data/i18n";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -107,6 +107,46 @@ const year = new Date().getFullYear();
               rel="noopener noreferrer"
             >
               {credit.license}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section
+    class="photo-credits source-ledger reveal"
+    aria-labelledby="fact-sources-title"
+  >
+    <header>
+      <p class="archive-label" data-i18n="credits.factLabel">
+        {translations.es["credits.factLabel"]}
+      </p>
+      <h2 id="fact-sources-title" data-i18n="credits.factTitle">
+        {translations.es["credits.factTitle"]}
+      </h2>
+      <p data-i18n="credits.factBody">
+        {translations.es["credits.factBody"]}
+      </p>
+    </header>
+    <ol>
+      {
+        factualSources.map((source, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <strong>{source.title}</strong>
+              <p data-i18n={source.detailKey}>
+                {translations.es[source.detailKey]}
+              </p>
+            </div>
+            <a
+              href={source.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="credits.factOpen"
+            >
+              {translations.es["credits.factOpen"]}
             </a>
           </li>
         ))

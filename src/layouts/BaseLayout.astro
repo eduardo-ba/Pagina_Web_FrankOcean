@@ -5,20 +5,35 @@ import { translations } from "../data/i18n";
 import "../styles/global.css";
 
 interface Props {
-  metaKey: "home" | "archive" | "history" | "credits";
+  metaKey:
+    | "home"
+    | "archive"
+    | "history"
+    | "credits"
+    | "radio"
+    | "explore"
+    | "objects"
+    | "editions"
+    | "era-nostalgia-ultra"
+    | "era-channel-orange"
+    | "era-endless"
+    | "era-blonde"
+    | "era-singles";
   pageTheme?: "paper" | "black";
+  socialImage?: string;
 }
 
-const { metaKey, pageTheme = "paper" } = Astro.props;
+const {
+  metaKey,
+  pageTheme = "paper",
+  socialImage = "/social/blonded-visual-archive-og.jpg",
+} = Astro.props;
 const titleKey = `meta.${metaKey}.title`;
 const descriptionKey = `meta.${metaKey}.description`;
 const currentPath = Astro.url.pathname;
 const siteOrigin = Astro.site ?? Astro.url.origin;
 const canonicalUrl = new URL(currentPath, siteOrigin);
-const socialImageUrl = new URL(
-  "/social/blonded-visual-archive-og.jpg",
-  siteOrigin,
-);
+const socialImageUrl = new URL(socialImage, siteOrigin);
 ---
 
 <!doctype html>
@@ -59,6 +74,10 @@ const socialImageUrl = new URL(
       content={translations.es["meta.socialImageAlt"]}
     />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/brand/bva-mark.svg" type="image/svg+xml" />
+    <link rel="icon" href="/brand/bva-mark-32.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/brand/bva-touch-icon.png" />
+    <link rel="mask-icon" href="/brand/bva-mask.svg" color="#b7f34a" />
     <script is:inline>
       try {
         const storedLanguage =
@@ -71,10 +90,6 @@ const socialImageUrl = new URL(
         document.documentElement.dataset.language = "es";
       }
     </script>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23090908%22/><text x=%2250%22 y=%2263%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2239%22 font-weight=%22900%22 fill=%22%23B7F34A%22>BVA</text></svg>"
-    />
     <title>{translations.es[titleKey]}</title>
   </head>
   <body
@@ -105,10 +120,31 @@ const socialImageUrl = new URL(
             if (key && copy[key]) element.textContent = copy[key];
           });
 
+        document
+          .querySelectorAll<HTMLElement>("[data-copy-es][data-copy-en]")
+          .forEach((element) => {
+            const value =
+              language === "en"
+                ? element.dataset.copyEn
+                : element.dataset.copyEs;
+            if (value) element.textContent = value;
+          });
+
+        document
+          .querySelectorAll<HTMLElement>("[data-copy-alt-es][data-copy-alt-en]")
+          .forEach((element) => {
+            const value =
+              language === "en"
+                ? element.dataset.copyAltEn
+                : element.dataset.copyAltEs;
+            if (value) element.setAttribute("alt", value);
+          });
+
         const translatedAttributes = [
           ["data-i18n-alt", "alt"],
           ["data-i18n-aria-label", "aria-label"],
           ["data-i18n-title", "title"],
+          ["data-i18n-placeholder", "placeholder"],
         ] as const;
 
         translatedAttributes.forEach(([keyAttribute, targetAttribute]) => {
@@ -166,6 +202,10 @@ const socialImageUrl = new URL(
         document
           .querySelector<HTMLMetaElement>('meta[property="og:locale"]')
           ?.setAttribute("content", language === "en" ? "en_US" : "es_MX");
+
+        window.dispatchEvent(
+          new CustomEvent("bva:languagechange", { detail: { language } }),
+        );
       };
 
       const initialLanguage: Language =

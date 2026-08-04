@@ -7,13 +7,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout metaKey="home" pageTheme="black">
   <section class="archive-gate">
-    <MediaFigure
-      src={archiveMedia.collage}
-      altKey="home.heroAlt"
-      class="archive-gate__image"
-      eager
-      sizes="100vw"
-    />
+    <div class="archive-gate__media">
+      <MediaFigure
+        src={archiveMedia.portrait}
+        altKey="home.heroPortraitAlt"
+        class="archive-gate__image archive-gate__image--portrait"
+        eager
+        sizes="100vw"
+      />
+      <MediaFigure
+        src={archiveEras[0].cover}
+        altKey="era.nostalgia-ultra.alt"
+        class="archive-gate__image archive-gate__image--artifact-one"
+        sizes="(min-width: 900px) 18vw, 42vw"
+      />
+      <MediaFigure
+        src={archiveEras[3].cover}
+        altKey="era.blonde.alt"
+        class="archive-gate__image archive-gate__image--artifact-two"
+        sizes="(min-width: 900px) 15vw, 34vw"
+      />
+    </div>
     <div class="archive-gate__wash" aria-hidden="true"></div>
     <p class="archive-gate__meta">
       <span data-i18n="home.heroMeta">{translations.es["home.heroMeta"]}</span

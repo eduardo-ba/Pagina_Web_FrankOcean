@@ -1,0 +1,61 @@
+---
+import EditorialIntro from "../components/EditorialIntro.astro";
+import { editions } from "../data/archive-content";
+import { translations } from "../data/i18n";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout metaKey="editions" pageTheme="black">
+  <EditorialIntro
+    indexKey="editions.introIndex"
+    eyebrowKey="editions.introEyebrow"
+    titleKey="editions.introTitle"
+    descriptionKey="editions.introDescription"
+    variant="dark"
+  />
+
+  <section class="edition-register">
+    {
+      editions.map((edition, index) => (
+        <article
+          class:list={[
+            "edition-entry",
+            index === editions.length - 1 && "edition-entry--current",
+            "reveal",
+          ]}
+        >
+          <div class="edition-entry__number">{edition.number}</div>
+          <div>
+            <p class="archive-label">
+              {edition.year}
+              {index === editions.length - 1 && (
+                <span data-i18n="editions.current">
+                  {translations.es["editions.current"]}
+                </span>
+              )}
+            </p>
+            <h2
+              data-copy-es={edition.status.es}
+              data-copy-en={edition.status.en}
+            >
+              {edition.status.es}
+            </h2>
+            <p
+              data-copy-es={edition.description.es}
+              data-copy-en={edition.description.en}
+            >
+              {edition.description.es}
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <a class="edition-exit" href="/explorar">
+    <span data-i18n="editions.openExplore">
+      {translations.es["editions.openExplore"]}
+    </span>
+    <span aria-hidden="true">→</span>
+  </a>
+</BaseLayout>

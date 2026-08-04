@@ -1,4 +1,5 @@
 ---
+import ArchiveLogo from "./ArchiveLogo.astro";
 import { translations } from "../data/i18n";
 
 interface Props {
@@ -7,13 +8,36 @@ interface Props {
 
 const { currentPath } = Astro.props;
 const links = [
-  { href: "/", index: "01", key: "nav.cover" },
-  { href: "/discografia", index: "02", key: "nav.archive" },
-  { href: "/biografia", index: "03", key: "nav.history" },
-  { href: "/contacto", index: "04", key: "nav.credits" },
+  { href: "/", index: "01", key: "nav.cover", matches: ["/"] },
+  {
+    href: "/discografia",
+    index: "02",
+    key: "nav.archive",
+    matches: ["/discografia", "/archivo"],
+  },
+  {
+    href: "/biografia",
+    index: "03",
+    key: "nav.history",
+    matches: ["/biografia"],
+  },
+  {
+    href: "/explorar",
+    index: "04",
+    key: "nav.explore",
+    matches: ["/explorar", "/radio", "/objetos", "/ediciones"],
+  },
+  {
+    href: "/contacto",
+    index: "05",
+    key: "nav.credits",
+    matches: ["/contacto"],
+  },
 ];
-const isCurrent = (href: string) =>
-  href === "/" ? currentPath === href : currentPath.startsWith(href);
+const isCurrent = (matches: string[]) =>
+  matches.some((path) =>
+    path === "/" ? currentPath === path : currentPath.startsWith(path),
+  );
 ---
 
 <header class="archive-header">
@@ -23,10 +47,7 @@ const isCurrent = (href: string) =>
     aria-label={translations.es["global.brandHome"]}
     data-i18n-aria-label="global.brandHome"
   >
-    <span aria-hidden="true">BVA</span>
-    <span class="archive-brand__long" data-i18n="brand.name"
-      >{translations.es["brand.name"]}</span
-    >
+    <ArchiveLogo />
   </a>
 
   <nav
@@ -35,9 +56,12 @@ const isCurrent = (href: string) =>
   >
     <ul class="archive-nav">
       {
-        links.map(({ href, index, key }) => (
+        links.map(({ href, index, key, matches }) => (
           <li>
-            <a href={href} aria-current={isCurrent(href) ? "page" : undefined}>
+            <a
+              href={href}
+              aria-current={isCurrent(matches) ? "page" : undefined}
+            >
               <span>{index} /</span>{" "}
               <span data-i18n={key}>{translations.es[key]}</span>
             </a>
