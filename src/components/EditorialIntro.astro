@@ -1,0 +1,20 @@
+---
+interface Props {
+  index: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  variant?: "light" | "dark";
+}
+
+const { index, eyebrow, title, description, variant = "light" } = Astro.props;
+---
+
+<header class:list={["editorial-intro", `editorial-intro--${variant}`]}>
+  <div class="editorial-intro__meta">
+    <span>{index}</span>
+    <p>{eyebrow}</p>
+  </div>
+  <h1>{title}</h1>
+  <p class="editorial-intro__lead">{description}</p>
+</header>

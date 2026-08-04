@@ -1,0 +1,43 @@
+---
+import type { ArchiveEra } from "../data/albums";
+import MediaFigure from "./MediaFigure.astro";
+
+interface Props {
+  era: ArchiveEra;
+  index: number;
+}
+
+const { era, index } = Astro.props;
+const label = String(index + 1).padStart(2, "0");
+---
+
+<article
+  id={era.slug}
+  class:list={["era-chapter", `era-chapter--${era.layout}`, "reveal"]}
+  data-era={era.theme}
+>
+  <div class="era-chapter__number" aria-hidden="true">{label}</div>
+  <MediaFigure
+    src={era.cover}
+    alt={era.alt}
+    caption={`${era.year} / ${era.category}`}
+    class="era-chapter__image"
+    sizes="(min-width: 900px) 58vw, 100vw"
+  />
+  <div class="era-chapter__copy">
+    <p class="archive-label">{era.category}</p>
+    <h2>{era.title}</h2>
+    <p class="era-chapter__year">{era.year}</p>
+    <p class="era-chapter__description">{era.description}</p>
+    <p class="era-chapter__track"><span>Selección</span>{era.featuredTrack}</p>
+    <a
+      class="archive-link"
+      href={era.url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Escuchar / {era.platform}
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

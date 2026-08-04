@@ -1,7 +1,7 @@
 {
-  "name": "pagina_web_frankocean",
+  "name": "blonded-visual-archive",
   "version": "1.0.0",
-  "description": "Un archivo personal dedicado a la música y la historia de Frank Ocean.",
+  "description": "Archivo visual no oficial, personal y no comercial sobre las eras de Frank Ocean.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",

@@ -1,58 +1,82 @@
 ---
-import PageIntro from "../components/PageIntro.astro";
+import EditorialIntro from "../components/EditorialIntro.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Contacto"
-  description="Conoce el origen de Franksmind y conecta con el creador del proyecto."
+  title="Créditos"
+  description="Colofón, intención, créditos y enlaces de Blonded Visual Archive."
+  pageTheme="black"
 >
-  <PageIntro
-    eyebrow="Hablemos de música"
-    title="¿Qué canción te acompaña?"
-    description="Este sitio nació de una relación personal con la música. Si también tienes una historia que empezó con una canción, me encantará conocerla."
+  <EditorialIntro
+    index="04 / Colofón"
+    eyebrow="Archive notes / edición 01"
+    title="Credits, context & care."
+    description="Una colección construida desde la escucha personal. Código, selección y dirección visual por Luis Eduardo Barrón Álvarez."
+    variant="dark"
   />
 
-  <section class="contact-panel shell">
-    <div class="contact-statement">
-      <p class="eyebrow eyebrow-light">Detrás del sitio</p>
+  <section class="credits-ledger">
+    <article class="credits-author reveal">
+      <p class="archive-label">Editor / diseñador / desarrollo</p>
       <h2>Luis Eduardo<br />Barrón Álvarez</h2>
       <p>
-        Diseñé y construí Franksmind como un archivo personal dedicado a la obra
-        de Frank Ocean y a los recuerdos que viven dentro de sus canciones.
+        El archivo reúne proyectos, imágenes y recuerdos alrededor de la música
+        de Frank Ocean. Su intención es cultural y personal: ordenar una
+        relación con las canciones, no representar al artista.
       </p>
-    </div>
+    </article>
 
-    <div class="contact-links" aria-label="Formas de contacto">
+    <div class="credits-index" aria-label="Enlaces del proyecto">
       <a
         href="https://github.com/eduardo-ba"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span>
-          <small>Código y proyectos</small>
-          GitHub
-        </span>
-        <span aria-hidden="true">↗</span>
+        <span>01 / Código y proyectos</span><strong>GitHub</strong><span
+          aria-hidden="true">↗</span
+        >
       </a>
       <a
         href="https://open.spotify.com/playlist/2iDpx90bonkWEaOvkVFpCl"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span>
-          <small>La inspiración del sitio</small>
-          Mi playlist
-        </span>
-        <span aria-hidden="true">↗</span>
+        <span>02 / Registro de escucha</span><strong>Playlist</strong><span
+          aria-hidden="true">↗</span
+        >
       </a>
       <a href="/discografia">
-        <span>
-          <small>Continúa explorando</small>
-          Discografía
-        </span>
-        <span aria-hidden="true">→</span>
+        <span>03 / Volver a la colección</span><strong>Archivo</strong><span
+          aria-hidden="true">→</span
+        >
       </a>
+    </div>
+  </section>
+
+  <section class="archive-notes reveal">
+    <div>
+      <p class="archive-label">Sistema</p>
+      <p>Astro estático / TypeScript / CSS nativo / astro:assets</p>
+    </div>
+    <div>
+      <p class="archive-label">Carácter</p>
+      <p>
+        Archivo no oficial, personal y no comercial. Sin afiliación con Frank
+        Ocean.
+      </p>
+    </div>
+    <div>
+      <p class="archive-label">Derechos</p>
+      <p>
+        Las imágenes, portadas, música y nombres pertenecen a sus respectivos
+        titulares. Se muestran aquí con propósito editorial dentro de un
+        proyecto personal.
+      </p>
+    </div>
+    <div>
+      <p class="archive-label">Edición</p>
+      <p>01 / Chihuahua, México / {new Date().getFullYear()}</p>
     </div>
   </section>
 </BaseLayout>

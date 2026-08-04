@@ -1,6 +1,6 @@
-# Franksmind
+# Blonded Visual Archive
 
-Archivo personal dedicado a la música, la historia y el universo creativo de Frank Ocean.
+Archivo visual no oficial, personal y no comercial sobre la música, las eras y el universo creativo de Frank Ocean. Construido como una publicación editorial estática con Astro.
 
 ## Desarrollo
 
@@ -27,6 +27,11 @@ El servidor de desarrollo estará disponible en `http://localhost:4321`.
 - `src/pages`: rutas del sitio.
 - `src/components`: componentes compartidos.
 - `src/layouts`: plantilla HTML y metadatos.
-- `src/data`: contenido estructurado de la discografía.
-- `src/styles`: estilos globales y responsive.
-- `public`: imágenes y fuentes estáticas.
+- `src/assets/images`: imágenes editoriales optimizadas con `astro:assets`.
+- `src/data`: eras, metadatos y secuencia histórica centralizados.
+- `src/styles`: tokens, base, composiciones y movimiento.
+- `public`: originales y recursos que conservan URL estable.
+
+## Medios
+
+La edición actual reutiliza los ocho assets locales disponibles. Para ampliar la narrativa conviene incorporar fotografías panorámicas acreditadas y fotogramas propios por era, sin hotlinks ni repetición de portadas principales.

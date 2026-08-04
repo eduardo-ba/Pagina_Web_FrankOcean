@@ -1,71 +1,93 @@
 ---
-import PageIntro from "../components/PageIntro.astro";
+import { Image } from "astro:assets";
+import EditorialIntro from "../components/EditorialIntro.astro";
+import MediaFigure from "../components/MediaFigure.astro";
+import { archiveMedia, archiveYears } from "../data/albums";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const milestones = [
-  {
-    years: "1987—2005",
-    title: "Nueva Orleans y los primeros capítulos",
-    text: "Christopher Edwin Breaux creció en Nueva Orleans, rodeado por la tradición musical de la ciudad. Después del huracán Katrina, se trasladó a Los Ángeles para continuar grabando y perseguir una carrera en la música.",
-  },
-  {
-    years: "2008—2010",
-    title: "El compositor detrás de escena",
-    text: "Antes de ocupar el centro del escenario, escribió para otros artistas y desarrolló su propia voz. En Los Ángeles se acercó al colectivo Odd Future y firmó como solista con Def Jam.",
-  },
-  {
-    years: "2011",
-    title: "Nostalgia, Ultra",
-    text: "Publicó gratuitamente el mixtape que cambió el rumbo de su carrera. Su forma de mezclar confesión, ficción y cultura popular capturó la atención de la crítica y de una nueva generación de oyentes.",
-  },
-  {
-    years: "2012",
-    title: "Channel Orange",
-    text: "Su debut de estudio convirtió historias sobre deseo, privilegio y soledad en escenas de gran precisión. El proyecto obtuvo reconocimiento internacional y el Grammy a mejor álbum urbano contemporáneo.",
-  },
-  {
-    years: "2016",
-    title: "Endless y Blonde",
-    text: "En días consecutivos presentó un álbum visual y una obra todavía más íntima. Blonde rompió estructuras tradicionales de la canción y consolidó su independencia creativa.",
-  },
-];
 ---
 
 <BaseLayout
-  title="Biografía"
-  description="Un recorrido por los momentos decisivos en la vida y la carrera artística de Frank Ocean."
+  title="Historia"
+  description="Una secuencia editorial por momentos decisivos en la trayectoria creativa de Frank Ocean."
 >
-  <PageIntro
+  <EditorialIntro
+    index="03 / Historia oral"
     eyebrow="Christopher Francis Ocean"
-    title="Una voz fuera del tiempo"
-    description="De Nueva Orleans a una independencia creativa casi absoluta: cinco momentos para entender su recorrido."
+    title="A voice outside time."
+    description="No una biografía exhaustiva, sino cinco cortes: lugares, obras y decisiones que cambiaron la escala de una voz."
   />
 
-  <section class="bio-layout shell">
-    <aside class="bio-aside">
-      <img
-        src="/imagenes/frank-ocean.jpg"
-        alt="Retrato de Frank Ocean"
-        width="474"
-        height="479"
-      />
-      <p>
-        Cantante<br />Compositor<br />Productor
-      </p>
-    </aside>
+  <section class="portrait-spread reveal" aria-label="Retrato de apertura">
+    <Image
+      src={archiveMedia.portrait}
+      alt="Retrato de Frank Ocean sobre fondo azul"
+      widths={[474, 768, 960]}
+      sizes="(min-width: 900px) 42vw, 84vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <p class="portrait-spread__name">Frank<br />Ocean</p>
+    <p class="portrait-spread__roles">
+      Cantante / compositor / productor<br />Nueva Orleans → Los Ángeles
+    </p>
+  </section>
 
-    <ol class="timeline">
-      {
-        milestones.map(({ years, title, text }) => (
-          <li class="timeline-item">
-            <p class="timeline-year">{years}</p>
-            <div>
-              <h2>{title}</h2>
-              <p>{text}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
+  <nav class="year-index" aria-label="Índice de años">
+    {
+      archiveYears.map((entry) => (
+        <a href={`#year-${entry.years.slice(0, 4)}`}>{entry.years}</a>
+      ))
+    }
+  </nav>
+
+  <section class="history-sequence" aria-label="Momentos en la trayectoria">
+    {
+      archiveYears.map((entry, index) => (
+        <article
+          id={`year-${entry.years.slice(0, 4)}`}
+          class:list={[
+            "history-entry",
+            index === 4 && "history-entry--climax",
+            "reveal",
+          ]}
+        >
+          <div class="history-entry__year" aria-hidden="true">
+            {entry.years}
+          </div>
+          <p class="archive-label">
+            Corte {String(index + 1).padStart(2, "0")}
+          </p>
+          <h2>{entry.title}</h2>
+          <p class="history-entry__copy">{entry.text}</p>
+          {index === 2 && (
+            <MediaFigure
+              src={archiveMedia.playlist}
+              alt="Arte de una selección personal de canciones"
+              caption="Selección personal / registro de escucha"
+              class="history-entry__media history-entry__media--small"
+              sizes="(min-width: 900px) 28vw, 72vw"
+            />
+          )}
+          {index === 4 && (
+            <MediaFigure
+              src={archiveMedia.collage}
+              alt="Collage editorial asociado a Blonde"
+              caption="2016 / Endless + Blonde"
+              class="history-entry__media"
+              sizes="(min-width: 900px) 45vw, 100vw"
+            />
+          )}
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="history-close reveal">
+    <p class="archive-label">Cierre abierto</p>
+    <p>
+      La independencia no aparece aquí como punto final, sino como método:
+      publicar menos, decidir más y dejar espacio para que cada obra cambie con
+      quien la escucha.
+    </p>
   </section>
 </BaseLayout>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const links = [
+  { href: "/", index: "01", label: "Portada" },
+  { href: "/discografia", index: "02", label: "Archivo" },
+  { href: "/biografia", index: "03", label: "Historia" },
+  { href: "/contacto", index: "04", label: "Créditos" },
+];
+const isCurrent = (href: string) =>
+  href === "/" ? currentPath === href : currentPath.startsWith(href);
+---
+
+<header class="archive-header">
+  <a
+    class="archive-brand"
+    href="/"
+    aria-label="Blonded Visual Archive, ir a portada"
+  >
+    <span aria-hidden="true">BVA</span>
+    <span class="archive-brand__long">Blonded Visual Archive</span>
+  </a>
+
+  <nav aria-label="Navegación del archivo">
+    <ul class="archive-nav">
+      {
+        links.map(({ href, index, label }) => (
+          <li>
+            <a href={href} aria-current={isCurrent(href) ? "page" : undefined}>
+              <span>{index} /</span> {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

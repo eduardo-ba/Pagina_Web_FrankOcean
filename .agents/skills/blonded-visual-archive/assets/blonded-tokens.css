@@ -1,0 +1,74 @@
+:root {
+  /* Neutral archive */
+  --bva-black: #090908;
+  --bva-paper: #f0eddf;
+  --bva-ivory: #f8f5e9;
+  --bva-gray: #c8c8c1;
+  --bva-muted: #5c5a51;
+  --bva-line-light: rgb(9 9 8 / 16%);
+  --bva-line-dark: rgb(248 245 233 / 18%);
+
+  /* Era accents */
+  --bva-blonde-green: #b7f34a;
+  --bva-olive-haze: #69714a;
+  --bva-channel-orange: #ff6b18;
+  --bva-burnt-orange: #9a421a;
+  --bva-photo-yellow: #d9b64f;
+  --bva-mist-blue: #8bcfe6;
+  --bva-auto-red: #c32620;
+
+  /* Typography */
+  --bva-font-display:
+    "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bva-font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bva-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* Scale */
+  --bva-copy: clamp(1rem, 0.94rem + 0.22vw, 1.16rem);
+  --bva-label: clamp(0.65rem, 0.62rem + 0.08vw, 0.74rem);
+  --bva-title: clamp(4rem, 13vw, 11rem);
+  --bva-section-title: clamp(3rem, 8vw, 7rem);
+
+  /* Layout */
+  --bva-gutter: clamp(1rem, 3vw, 3rem);
+  --bva-shell: 92rem;
+  --bva-section-space: clamp(5rem, 12vw, 11rem);
+  --bva-hairline: 1px;
+  --bva-radius-object: 4px;
+
+  /* Motion */
+  --bva-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --bva-duration-fast: 220ms;
+  --bva-duration-medium: 560ms;
+  --bva-duration-slow: 900ms;
+}
+
+[data-era="nostalgia"] {
+  --era-bg: var(--bva-auto-red);
+  --era-ink: var(--bva-ivory);
+  --era-accent: var(--bva-black);
+}
+
+[data-era="orange"] {
+  --era-bg: var(--bva-channel-orange);
+  --era-ink: var(--bva-black);
+  --era-accent: var(--bva-ivory);
+}
+
+[data-era="endless"] {
+  --era-bg: var(--bva-ivory);
+  --era-ink: var(--bva-black);
+  --era-accent: var(--bva-gray);
+}
+
+[data-era="blonde"] {
+  --era-bg: var(--bva-paper);
+  --era-ink: var(--bva-black);
+  --era-accent: var(--bva-blonde-green);
+}
+
+[data-era="singles"] {
+  --era-bg: var(--bva-black);
+  --era-ink: var(--bva-ivory);
+  --era-accent: var(--bva-mist-blue);
+}

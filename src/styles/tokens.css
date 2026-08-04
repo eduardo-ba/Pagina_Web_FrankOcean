@@ -1,0 +1,53 @@
+:root {
+  --black: #090908;
+  --paper: #f0eddf;
+  --ivory: #f8f5e9;
+  --gray: #c8c8c1;
+  --muted: #5c5a51;
+  --green: #b7f34a;
+  --olive: #69714a;
+  --orange: #ff6b18;
+  --yellow: #d9b64f;
+  --blue: #8bcfe6;
+  --red: #c32620;
+  --line-light: rgb(9 9 8 / 18%);
+  --line-dark: rgb(248 245 233 / 22%);
+  --font-display: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --label: clamp(0.65rem, 0.62rem + 0.08vw, 0.74rem);
+  --copy: clamp(1rem, 0.95rem + 0.2vw, 1.14rem);
+  --gutter: clamp(1rem, 3vw, 3rem);
+  --space: clamp(5rem, 11vw, 10rem);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-era="nostalgia"] {
+  --era-bg: var(--red);
+  --era-ink: var(--ivory);
+  --era-accent: var(--black);
+}
+
+[data-era="orange"] {
+  --era-bg: var(--orange);
+  --era-ink: var(--black);
+  --era-accent: var(--ivory);
+}
+
+[data-era="endless"] {
+  --era-bg: var(--ivory);
+  --era-ink: var(--black);
+  --era-accent: var(--gray);
+}
+
+[data-era="blonde"] {
+  --era-bg: var(--paper);
+  --era-ink: var(--black);
+  --era-accent: var(--green);
+}
+
+[data-era="singles"] {
+  --era-bg: var(--black);
+  --era-ink: var(--ivory);
+  --era-accent: var(--blue);
+}

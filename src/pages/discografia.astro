@@ -1,21 +1,42 @@
 ---
-import AlbumCard from "../components/AlbumCard.astro";
-import PageIntro from "../components/PageIntro.astro";
+import EditorialIntro from "../components/EditorialIntro.astro";
+import EraChapter from "../components/EraChapter.astro";
+import { archiveEras } from "../data/albums";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { albums } from "../data/albums";
 ---
 
 <BaseLayout
-  title="Discografía"
-  description="Álbumes, mixtapes, proyectos y una selección personal de la música de Frank Ocean."
+  title="Archivo"
+  description="Cinco capítulos visuales recorren los proyectos, eras y transmisiones de Frank Ocean."
 >
-  <PageIntro
-    eyebrow="El archivo sonoro"
-    title="Discografía"
-    description="Una obra breve en cantidad, inmensa en influencia. Explora los proyectos que construyeron el universo de Frank Ocean."
+  <EditorialIntro
+    index="02 / 05 registros"
+    eyebrow="Discografía como secuencia editorial"
+    title="The archive is the story."
+    description="Cinco registros, ordenados por temperatura y memoria. Cada obra abre un lenguaje visual propio dentro de una misma colección."
   />
 
-  <section class="shell album-grid" aria-label="Proyectos de Frank Ocean">
-    {albums.map((album, index) => <AlbumCard album={album} index={index} />)}
+  <nav class="chapter-nav" aria-label="Saltar a una era">
+    {
+      archiveEras.map((era, index) => (
+        <a href={`#${era.slug}`}>
+          <span>{String(index + 1).padStart(2, "0")}</span> {era.title}
+        </a>
+      ))
+    }
+  </nav>
+
+  <section class="era-sequence" aria-label="Proyectos por era">
+    {archiveEras.map((era, index) => <EraChapter era={era} index={index} />)}
   </section>
+
+  <aside class="asset-note">
+    <p class="archive-label">Nota de inventario / media</p>
+    <p>
+      Esta edición utiliza las ocho imágenes locales disponibles. Para una
+      siguiente versión conviene sumar fotografías panorámicas acreditadas de
+      cada era y fotogramas propios para ampliar la narrativa sin repetir
+      portadas.
+    </p>
+  </aside>
 </BaseLayout>
