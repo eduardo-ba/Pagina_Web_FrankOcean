@@ -59,7 +59,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "archive.sequenceAria": "Proyectos por era",
     "archive.assetLabel": "Nota de inventario / medios",
     "archive.assetBody":
-      "Esta edición utiliza las ocho imágenes locales disponibles. Para una siguiente versión conviene sumar fotografías panorámicas acreditadas de cada era y fotogramas propios para ampliar la narrativa sin repetir portadas.",
+      "Portadas de la colección y fotografía acreditada conviven como documentos de cada era. Los nuevos originales se sirven localmente y se optimizan con astro:assets, sin hotlinks.",
     "common.selection": "Selección",
     "common.listen": "Escuchar",
     "era.nostalgia-ultra.title": "Nostalgia, Ultra",
@@ -98,9 +98,10 @@ export const translations: Record<Language, Record<string, string>> = {
     "history.introEyebrow": "Christopher Francis Ocean",
     "history.introTitle": "Una voz fuera del tiempo.",
     "history.introDescription":
-      "No una biografía exhaustiva, sino cinco cortes: lugares, obras y decisiones que cambiaron la escala de una voz.",
+      "No una biografía exhaustiva, sino seis cortes: lugares, obras y decisiones que cambiaron la escala de una voz.",
     "history.portraitAria": "Retrato de apertura",
-    "history.portraitAlt": "Retrato de Frank Ocean sobre fondo azul",
+    "history.portraitAlt":
+      "Retrato frontal de Frank Ocean con chaqueta gris sobre fondo azul",
     "history.roles": "Cantante / compositor / productor",
     "history.route": "Nueva Orleans → Los Ángeles",
     "history.yearIndexAria": "Índice de años",
@@ -121,10 +122,21 @@ export const translations: Record<Language, Record<string, string>> = {
     "history.year.2016.title": "Dos obras / una ruptura",
     "history.year.2016.text":
       "Endless y Blonde llegaron en días consecutivos. El primero cerró una etapa; el segundo desarmó estructuras de canción y consolidó una independencia creativa radical.",
+    "history.year.2017.title": "La obra vuelve al escenario",
+    "history.year.2017.text":
+      "Después de Blonde, los conciertos hicieron visible una nueva escala: arreglos cambiantes, una puesta en escena contenida y canciones que seguían transformándose en público.",
     "history.playlistAlt": "Arte de una selección personal de canciones",
     "history.playlistCaption": "Selección personal / registro de escucha",
     "history.collageAlt": "Collage editorial asociado a Blonde",
     "history.collageCaption": "2016 / Endless + Blonde",
+    "history.coachellaAlt":
+      "Frank Ocean actuando con su banda bajo luces azules en Coachella 2012",
+    "history.coachellaCaption":
+      "Coachella / 2012 / fotografía de David Hwang / CC BY 2.0",
+    "history.flowAlt":
+      "Frank Ocean actuando frente al público de Flow Festival al atardecer",
+    "history.flowCaption":
+      "Flow Festival / 2017 / fotografía de Kallerna / CC BY-SA 4.0",
     "history.closeLabel": "Cierre abierto",
     "history.closeBody":
       "La independencia no aparece aquí como punto final, sino como método: publicar menos, decidir más y dejar espacio para que cada obra cambie con quien la escucha.",
@@ -151,7 +163,12 @@ export const translations: Record<Language, Record<string, string>> = {
       "Archivo no oficial, personal y no comercial. Sin afiliación con Frank Ocean.",
     "credits.rightsLabel": "Derechos",
     "credits.rightsBody":
-      "Las imágenes, portadas, música y nombres pertenecen a sus respectivos titulares. Se muestran aquí con propósito editorial dentro de un proyecto personal.",
+      "Las portadas, música y nombres pertenecen a sus respectivos titulares. La fotografía con licencia abierta se atribuye a continuación; el resto se muestra con propósito editorial dentro de un proyecto personal.",
+    "credits.photographyLabel": "Fotografía / fuentes abiertas",
+    "credits.photographyTitle": "Autores y licencias.",
+    "credits.photographyBody":
+      "Tres fotografías descargadas de Wikimedia Commons, conservadas como assets locales y presentadas sin sugerir respaldo de sus autores.",
+    "credits.photoSource": "Ficha original ↗",
     "credits.editionLabel": "Edición",
     "credits.location": "01 / Mazatlán, México",
   },
@@ -213,7 +230,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "archive.sequenceAria": "Projects by era",
     "archive.assetLabel": "Inventory note / media",
     "archive.assetBody":
-      "This edition uses the eight available local images. A future version would benefit from credited panoramic photography and original stills for each era, expanding the narrative without repeating covers.",
+      "Collection covers and credited photography coexist as documents of each era. The new originals are served locally and optimized with astro:assets, with no hotlinks.",
     "common.selection": "Selection",
     "common.listen": "Listen",
     "era.nostalgia-ultra.title": "Nostalgia, Ultra",
@@ -251,9 +268,10 @@ export const translations: Record<Language, Record<string, string>> = {
     "history.introEyebrow": "Christopher Francis Ocean",
     "history.introTitle": "A voice outside time.",
     "history.introDescription":
-      "Not an exhaustive biography, but five cuts: places, works, and decisions that changed the scale of a voice.",
+      "Not an exhaustive biography, but six cuts: places, works, and decisions that changed the scale of a voice.",
     "history.portraitAria": "Opening portrait",
-    "history.portraitAlt": "Portrait of Frank Ocean against a blue background",
+    "history.portraitAlt":
+      "Front-facing portrait of Frank Ocean in a gray jacket against a blue background",
     "history.roles": "Singer / songwriter / producer",
     "history.route": "New Orleans → Los Angeles",
     "history.yearIndexAria": "Year index",
@@ -274,10 +292,21 @@ export const translations: Record<Language, Record<string, string>> = {
     "history.year.2016.title": "Two works / one break",
     "history.year.2016.text":
       "Endless and Blonde arrived on consecutive days. The first closed one chapter; the second dismantled song structures and cemented radical creative independence.",
+    "history.year.2017.title": "The work returns to the stage",
+    "history.year.2017.text":
+      "After Blonde, live performances revealed a new scale: changing arrangements, restrained staging, and songs that continued to transform in public.",
     "history.playlistAlt": "Artwork for a personal song selection",
     "history.playlistCaption": "Personal selection / listening record",
     "history.collageAlt": "Editorial collage associated with Blonde",
     "history.collageCaption": "2016 / Endless + Blonde",
+    "history.coachellaAlt":
+      "Frank Ocean performing with his band under blue lights at Coachella 2012",
+    "history.coachellaCaption":
+      "Coachella / 2012 / photograph by David Hwang / CC BY 2.0",
+    "history.flowAlt":
+      "Frank Ocean performing before the Flow Festival crowd at dusk",
+    "history.flowCaption":
+      "Flow Festival / 2017 / photograph by Kallerna / CC BY-SA 4.0",
     "history.closeLabel": "Open ending",
     "history.closeBody":
       "Independence appears here not as a final point, but as a method: release less, decide more, and leave room for every work to change with its listener.",
@@ -304,7 +333,12 @@ export const translations: Record<Language, Record<string, string>> = {
       "Unofficial, personal, non-commercial archive. Not affiliated with Frank Ocean.",
     "credits.rightsLabel": "Rights",
     "credits.rightsBody":
-      "Images, covers, music, and names belong to their respective rights holders. They appear here for editorial purposes within a personal project.",
+      "Covers, music, and names belong to their respective rights holders. Openly licensed photography is attributed below; the rest appears for editorial purposes within a personal project.",
+    "credits.photographyLabel": "Photography / open sources",
+    "credits.photographyTitle": "Authors & licenses.",
+    "credits.photographyBody":
+      "Three photographs downloaded from Wikimedia Commons, stored as local assets, and presented without implying endorsement by their authors.",
+    "credits.photoSource": "Original file ↗",
     "credits.editionLabel": "Edition",
     "credits.location": "01 / Mazatlán, Mexico",
   },

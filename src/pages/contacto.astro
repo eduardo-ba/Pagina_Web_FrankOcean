@@ -1,5 +1,6 @@
 ---
 import EditorialIntro from "../components/EditorialIntro.astro";
+import { photoCredits } from "../data/albums";
 import { translations } from "../data/i18n";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -69,6 +70,48 @@ const year = new Date().getFullYear();
         <span aria-hidden="true">→</span>
       </a>
     </div>
+  </section>
+
+  <section class="photo-credits reveal" aria-labelledby="photo-credits-title">
+    <header>
+      <p class="archive-label" data-i18n="credits.photographyLabel">
+        {translations.es["credits.photographyLabel"]}
+      </p>
+      <h2 id="photo-credits-title" data-i18n="credits.photographyTitle">
+        {translations.es["credits.photographyTitle"]}
+      </h2>
+      <p data-i18n="credits.photographyBody">
+        {translations.es["credits.photographyBody"]}
+      </p>
+    </header>
+    <ol>
+      {
+        photoCredits.map((credit, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <strong>{credit.title}</strong>
+              <p>{credit.author}</p>
+            </div>
+            <a
+              href={credit.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="credits.photoSource"
+            >
+              {translations.es["credits.photoSource"]}
+            </a>
+            <a
+              href={credit.licenseUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {credit.license}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
   <section class="archive-notes reveal">

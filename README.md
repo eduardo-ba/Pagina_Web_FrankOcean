@@ -34,4 +34,10 @@ El servidor de desarrollo estará disponible en `http://localhost:4321`.
 
 ## Medios
 
-La edición actual reutiliza los ocho assets locales disponibles. Para ampliar la narrativa conviene incorporar fotografías panorámicas acreditadas y fotogramas propios por era, sin hotlinks ni repetición de portadas principales.
+Las imágenes se almacenan en `src/assets/images` y se sirven mediante `astro:assets`; no hay hotlinks. La secuencia histórica incorpora tres fotografías de Wikimedia Commons:
+
+- Andras Ladocsi, _Frank Ocean / Blonded 2022_ — CC BY-SA 4.0.
+- David Hwang, _Frank Ocean / Coachella 2012_ — CC BY 2.0.
+- Kallerna, _Frank Ocean / Flow Festival 2017_ — CC BY-SA 4.0.
+
+Las fichas originales y los enlaces de licencia también están disponibles en la ruta de créditos del sitio.

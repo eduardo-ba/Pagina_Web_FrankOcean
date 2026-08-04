@@ -64,7 +64,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             id={`year-${yearKey}`}
             class:list={[
               "history-entry",
-              index === 4 && "history-entry--climax",
+              yearKey === "2016" && "history-entry--climax",
               "reveal",
             ]}
           >
@@ -97,6 +97,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 captionKey="history.collageCaption"
                 class="history-entry__media"
                 sizes="(min-width: 900px) 45vw, 100vw"
+              />
+            )}
+            {yearKey === "2012" && (
+              <MediaFigure
+                src={archiveMedia.coachella2012}
+                altKey="history.coachellaAlt"
+                captionKey="history.coachellaCaption"
+                class="history-entry__media history-entry__media--stage"
+                sizes="(min-width: 900px) 48vw, 100vw"
+              />
+            )}
+            {yearKey === "2017" && (
+              <MediaFigure
+                src={archiveMedia.flow2017}
+                altKey="history.flowAlt"
+                captionKey="history.flowCaption"
+                class="history-entry__media history-entry__media--panorama"
+                sizes="(min-width: 900px) 72vw, 100vw"
               />
             )}
           </article>

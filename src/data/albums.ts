@@ -1,6 +1,8 @@
 import type { ImageMetadata } from "astro";
 import archiveCollage from "../assets/images/archive/archive-collage.jpg";
-import portrait from "../assets/images/archive/frank-ocean-portrait.jpg";
+import portrait from "../assets/images/archive/photography/frank-ocean-blonded-2022.jpg";
+import coachella2012 from "../assets/images/archive/photography/frank-ocean-coachella-2012.jpg";
+import flow2017 from "../assets/images/archive/photography/frank-ocean-flow-2017.jpg";
 import blondeCover from "../assets/images/blonde/blonde-cover.jpg";
 import channelOrangeCover from "../assets/images/channel-orange/channel-orange-cover.jpg";
 import endlessCover from "../assets/images/endless/endless-cover.webp";
@@ -28,7 +30,36 @@ export const archiveMedia = {
   collage: archiveCollage,
   portrait,
   playlist: playlistCover,
+  coachella2012,
+  flow2017,
 } as const;
+
+export const photoCredits = [
+  {
+    title: "Frank Ocean / Blonded 2022",
+    author: "Andras Ladocsi",
+    sourceUrl:
+      "https://commons.wikimedia.org/w/index.php?title=File%3AFrank_Ocean_2022_Blonded%2Ejpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  {
+    title: "Frank Ocean / Coachella 2012",
+    author: "David Hwang",
+    sourceUrl:
+      "https://commons.wikimedia.org/w/index.php?title=File%3AFrank_Ocean_Coachella_2012_1%2Ejpg",
+    license: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+  },
+  {
+    title: "Frank Ocean / Flow Festival 2017",
+    author: "Kallerna",
+    sourceUrl:
+      "https://commons.wikimedia.org/w/index.php?title=File%3AFrank_Ocean_Flow_Festival_2017%2Ejpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+] as const;
 
 export const archiveEras: ArchiveEra[] = [
   {
@@ -89,4 +120,5 @@ export const archiveYears = [
   "2011",
   "2012",
   "2016",
+  "2017",
 ] as const;
