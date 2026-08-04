@@ -1038,6 +1038,11 @@
     display: none;
   }
 
+  .transmission__frame {
+    height: clamp(12rem, 56.25vw, 22rem);
+    aspect-ratio: auto;
+  }
+
   .era-chapter {
     gap: 2.5rem;
   }
