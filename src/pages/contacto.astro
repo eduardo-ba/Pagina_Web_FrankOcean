@@ -1,82 +1,102 @@
 ---
 import EditorialIntro from "../components/EditorialIntro.astro";
+import { translations } from "../data/i18n";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const year = new Date().getFullYear();
 ---
 
-<BaseLayout
-  title="Créditos"
-  description="Colofón, intención, créditos y enlaces de Blonded Visual Archive."
-  pageTheme="black"
->
+<BaseLayout metaKey="credits" pageTheme="black">
   <EditorialIntro
-    index="04 / Colofón"
-    eyebrow="Archive notes / edición 01"
-    title="Credits, context & care."
-    description="Una colección construida desde la escucha personal. Código, selección y dirección visual por Luis Eduardo Barrón Álvarez."
+    indexKey="credits.introIndex"
+    eyebrowKey="credits.introEyebrow"
+    titleKey="credits.introTitle"
+    descriptionKey="credits.introDescription"
     variant="dark"
   />
 
   <section class="credits-ledger">
     <article class="credits-author reveal">
-      <p class="archive-label">Editor / diseñador / desarrollo</p>
+      <p class="archive-label" data-i18n="credits.authorLabel">
+        {translations.es["credits.authorLabel"]}
+      </p>
       <h2>Luis Eduardo<br />Barrón Álvarez</h2>
-      <p>
-        El archivo reúne proyectos, imágenes y recuerdos alrededor de la música
-        de Frank Ocean. Su intención es cultural y personal: ordenar una
-        relación con las canciones, no representar al artista.
+      <p data-i18n="credits.authorBody">
+        {translations.es["credits.authorBody"]}
       </p>
     </article>
 
-    <div class="credits-index" aria-label="Enlaces del proyecto">
+    <div
+      class="credits-index"
+      aria-label={translations.es["credits.linksAria"]}
+      data-i18n-aria-label="credits.linksAria"
+    >
       <a
         href="https://github.com/eduardo-ba"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span>01 / Código y proyectos</span><strong>GitHub</strong><span
-          aria-hidden="true">↗</span
+        <span data-i18n="credits.codeLabel"
+          >{translations.es["credits.codeLabel"]}</span
         >
+        <strong>GitHub</strong><span aria-hidden="true">↗</span>
       </a>
       <a
         href="https://open.spotify.com/playlist/2iDpx90bonkWEaOvkVFpCl"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span>02 / Registro de escucha</span><strong>Playlist</strong><span
-          aria-hidden="true">↗</span
-        >
+        <span data-i18n="credits.listeningLabel">
+          {translations.es["credits.listeningLabel"]}
+        </span>
+        <strong>Playlist</strong><span aria-hidden="true">↗</span>
       </a>
       <a href="/discografia">
-        <span>03 / Volver a la colección</span><strong>Archivo</strong><span
-          aria-hidden="true">→</span
+        <span data-i18n="credits.returnLabel"
+          >{translations.es["credits.returnLabel"]}</span
         >
+        <strong data-i18n="credits.archive"
+          >{translations.es["credits.archive"]}</strong
+        >
+        <span aria-hidden="true">→</span>
       </a>
     </div>
   </section>
 
   <section class="archive-notes reveal">
     <div>
-      <p class="archive-label">Sistema</p>
-      <p>Astro estático / TypeScript / CSS nativo / astro:assets</p>
-    </div>
-    <div>
-      <p class="archive-label">Carácter</p>
-      <p>
-        Archivo no oficial, personal y no comercial. Sin afiliación con Frank
-        Ocean.
+      <p class="archive-label" data-i18n="credits.systemLabel">
+        {translations.es["credits.systemLabel"]}
+      </p>
+      <p data-i18n="credits.systemBody">
+        {translations.es["credits.systemBody"]}
       </p>
     </div>
     <div>
-      <p class="archive-label">Derechos</p>
-      <p>
-        Las imágenes, portadas, música y nombres pertenecen a sus respectivos
-        titulares. Se muestran aquí con propósito editorial dentro de un
-        proyecto personal.
+      <p class="archive-label" data-i18n="credits.characterLabel">
+        {translations.es["credits.characterLabel"]}
+      </p>
+      <p data-i18n="credits.characterBody">
+        {translations.es["credits.characterBody"]}
       </p>
     </div>
     <div>
-      <p class="archive-label">Edición</p>
-      <p>01 / Chihuahua, México / {new Date().getFullYear()}</p>
+      <p class="archive-label" data-i18n="credits.rightsLabel">
+        {translations.es["credits.rightsLabel"]}
+      </p>
+      <p data-i18n="credits.rightsBody">
+        {translations.es["credits.rightsBody"]}
+      </p>
+    </div>
+    <div>
+      <p class="archive-label" data-i18n="credits.editionLabel">
+        {translations.es["credits.editionLabel"]}
+      </p>
+      <p>
+        <span data-i18n="credits.location"
+          >{translations.es["credits.location"]}</span
+        > / {year}
+      </p>
     </div>
   </section>
 </BaseLayout>

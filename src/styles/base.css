@@ -184,6 +184,29 @@ a {
   color: var(--green);
 }
 
+.brand-language {
+  display: flex;
+  border-left: 1px solid var(--line-dark);
+}
+
+.brand-language button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--label);
+  font-weight: 700;
+}
+
+.brand-language button[aria-pressed="true"] {
+  background: var(--green);
+  color: var(--black);
+}
+
 .archive-footer {
   position: relative;
   overflow: hidden;
@@ -306,7 +329,14 @@ a {
   }
 
   .archive-brand {
+    margin-right: 6rem;
     margin-bottom: 0.4rem;
+  }
+
+  .brand-language {
+    position: absolute;
+    top: 0.65rem;
+    right: var(--gutter);
   }
 
   .archive-brand__long {

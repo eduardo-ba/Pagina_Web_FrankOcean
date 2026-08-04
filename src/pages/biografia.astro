@@ -3,24 +3,27 @@ import { Image } from "astro:assets";
 import EditorialIntro from "../components/EditorialIntro.astro";
 import MediaFigure from "../components/MediaFigure.astro";
 import { archiveMedia, archiveYears } from "../data/albums";
+import { translations } from "../data/i18n";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-  title="Historia"
-  description="Una secuencia editorial por momentos decisivos en la trayectoria creativa de Frank Ocean."
->
+<BaseLayout metaKey="history">
   <EditorialIntro
-    index="03 / Historia oral"
-    eyebrow="Christopher Francis Ocean"
-    title="A voice outside time."
-    description="No una biografía exhaustiva, sino cinco cortes: lugares, obras y decisiones que cambiaron la escala de una voz."
+    indexKey="history.introIndex"
+    eyebrowKey="history.introEyebrow"
+    titleKey="history.introTitle"
+    descriptionKey="history.introDescription"
   />
 
-  <section class="portrait-spread reveal" aria-label="Retrato de apertura">
+  <section
+    class="portrait-spread reveal"
+    aria-label={translations.es["history.portraitAria"]}
+    data-i18n-aria-label="history.portraitAria"
+  >
     <Image
       src={archiveMedia.portrait}
-      alt="Retrato de Frank Ocean sobre fondo azul"
+      alt={translations.es["history.portraitAlt"]}
+      data-i18n-alt="history.portraitAlt"
       widths={[474, 768, 960]}
       sizes="(min-width: 900px) 42vw, 84vw"
       loading="eager"
@@ -28,66 +31,84 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     />
     <p class="portrait-spread__name">Frank<br />Ocean</p>
     <p class="portrait-spread__roles">
-      Cantante / compositor / productor<br />Nueva Orleans → Los Ángeles
+      <span data-i18n="history.roles">{translations.es["history.roles"]}</span
+      ><br />
+      <span data-i18n="history.route">{translations.es["history.route"]}</span>
     </p>
   </section>
 
-  <nav class="year-index" aria-label="Índice de años">
+  <nav
+    class="year-index"
+    aria-label={translations.es["history.yearIndexAria"]}
+    data-i18n-aria-label="history.yearIndexAria"
+  >
     {
-      archiveYears.map((entry) => (
-        <a href={`#year-${entry.years.slice(0, 4)}`}>{entry.years}</a>
+      archiveYears.map((years) => (
+        <a href={`#year-${years.slice(0, 4)}`}>{years}</a>
       ))
     }
   </nav>
 
-  <section class="history-sequence" aria-label="Momentos en la trayectoria">
+  <section
+    class="history-sequence"
+    aria-label={translations.es["history.sequenceAria"]}
+    data-i18n-aria-label="history.sequenceAria"
+  >
     {
-      archiveYears.map((entry, index) => (
-        <article
-          id={`year-${entry.years.slice(0, 4)}`}
-          class:list={[
-            "history-entry",
-            index === 4 && "history-entry--climax",
-            "reveal",
-          ]}
-        >
-          <div class="history-entry__year" aria-hidden="true">
-            {entry.years}
-          </div>
-          <p class="archive-label">
-            Corte {String(index + 1).padStart(2, "0")}
-          </p>
-          <h2>{entry.title}</h2>
-          <p class="history-entry__copy">{entry.text}</p>
-          {index === 2 && (
-            <MediaFigure
-              src={archiveMedia.playlist}
-              alt="Arte de una selección personal de canciones"
-              caption="Selección personal / registro de escucha"
-              class="history-entry__media history-entry__media--small"
-              sizes="(min-width: 900px) 28vw, 72vw"
-            />
-          )}
-          {index === 4 && (
-            <MediaFigure
-              src={archiveMedia.collage}
-              alt="Collage editorial asociado a Blonde"
-              caption="2016 / Endless + Blonde"
-              class="history-entry__media"
-              sizes="(min-width: 900px) 45vw, 100vw"
-            />
-          )}
-        </article>
-      ))
+      archiveYears.map((years, index) => {
+        const yearKey = years.slice(0, 4);
+        const titleKey = `history.year.${yearKey}.title`;
+        const textKey = `history.year.${yearKey}.text`;
+        return (
+          <article
+            id={`year-${yearKey}`}
+            class:list={[
+              "history-entry",
+              index === 4 && "history-entry--climax",
+              "reveal",
+            ]}
+          >
+            <div class="history-entry__year" aria-hidden="true">
+              {years}
+            </div>
+            <p class="archive-label">
+              <span data-i18n="history.cut">
+                {translations.es["history.cut"]}
+              </span>{" "}
+              {String(index + 1).padStart(2, "0")}
+            </p>
+            <h2 data-i18n={titleKey}>{translations.es[titleKey]}</h2>
+            <p class="history-entry__copy" data-i18n={textKey}>
+              {translations.es[textKey]}
+            </p>
+            {index === 2 && (
+              <MediaFigure
+                src={archiveMedia.playlist}
+                altKey="history.playlistAlt"
+                captionKey="history.playlistCaption"
+                class="history-entry__media history-entry__media--small"
+                sizes="(min-width: 900px) 28vw, 72vw"
+              />
+            )}
+            {index === 4 && (
+              <MediaFigure
+                src={archiveMedia.collage}
+                altKey="history.collageAlt"
+                captionKey="history.collageCaption"
+                class="history-entry__media"
+                sizes="(min-width: 900px) 45vw, 100vw"
+              />
+            )}
+          </article>
+        );
+      })
     }
   </section>
 
   <section class="history-close reveal">
-    <p class="archive-label">Cierre abierto</p>
-    <p>
-      La independencia no aparece aquí como punto final, sino como método:
-      publicar menos, decidir más y dejar espacio para que cada obra cambie con
-      quien la escucha.
+    <p class="archive-label" data-i18n="history.closeLabel">
+      {translations.es["history.closeLabel"]}
     </p>
+    <p data-i18n="history.closeBody">{translations.es["history.closeBody"]}</p>
   </section>
 </BaseLayout>

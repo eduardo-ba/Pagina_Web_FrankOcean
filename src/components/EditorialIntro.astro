@@ -1,20 +1,30 @@
 ---
+import { translations } from "../data/i18n";
+
 interface Props {
-  index: string;
-  eyebrow: string;
-  title: string;
-  description: string;
+  indexKey: string;
+  eyebrowKey: string;
+  titleKey: string;
+  descriptionKey: string;
   variant?: "light" | "dark";
 }
 
-const { index, eyebrow, title, description, variant = "light" } = Astro.props;
+const {
+  indexKey,
+  eyebrowKey,
+  titleKey,
+  descriptionKey,
+  variant = "light",
+} = Astro.props;
 ---
 
 <header class:list={["editorial-intro", `editorial-intro--${variant}`]}>
   <div class="editorial-intro__meta">
-    <span>{index}</span>
-    <p>{eyebrow}</p>
+    <span data-i18n={indexKey}>{translations.es[indexKey]}</span>
+    <p data-i18n={eyebrowKey}>{translations.es[eyebrowKey]}</p>
   </div>
-  <h1>{title}</h1>
-  <p class="editorial-intro__lead">{description}</p>
+  <h1 data-i18n={titleKey}>{translations.es[titleKey]}</h1>
+  <p class="editorial-intro__lead" data-i18n={descriptionKey}>
+    {translations.es[descriptionKey]}
+  </p>
 </header>

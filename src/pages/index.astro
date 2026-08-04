@@ -1,83 +1,103 @@
 ---
 import MediaFigure from "../components/MediaFigure.astro";
 import { archiveEras, archiveMedia } from "../data/albums";
+import { translations } from "../data/i18n";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-  title="Portada"
-  description="Blonded Visual Archive: colección personal, no oficial y no comercial sobre la obra y las eras de Frank Ocean."
-  pageTheme="black"
->
+<BaseLayout metaKey="home" pageTheme="black">
   <section class="archive-gate">
     <MediaFigure
       src={archiveMedia.collage}
-      alt="Collage editorial inspirado en la era Blonde"
+      altKey="home.heroAlt"
       class="archive-gate__image"
       eager
       sizes="100vw"
     />
     <div class="archive-gate__wash" aria-hidden="true"></div>
     <p class="archive-gate__meta">
-      Unofficial personal archive<br />2011—present / ES
+      <span data-i18n="home.heroMeta">{translations.es["home.heroMeta"]}</span
+      ><br />
+      <span data-i18n="home.heroPresent"
+        >{translations.es["home.heroPresent"]}</span
+      >
     </p>
-    <h1><span>Blonded</span><span>Visual Archive</span></h1>
+    <h1>
+      <span data-i18n="brand.primary">{translations.es["brand.primary"]}</span>
+      <span data-i18n="brand.secondary"
+        >{translations.es["brand.secondary"]}</span
+      >
+    </h1>
     <p class="archive-gate__edition">
-      Edición 01<br />Memoria / sonido / imagen
+      <span data-i18n="home.edition">{translations.es["home.edition"]}</span><br
+      />
+      <span data-i18n="home.editionTopics"
+        >{translations.es["home.editionTopics"]}</span
+      >
     </p>
-    <a class="archive-gate__scroll" href="#manifiesto"
-      >Abrir archivo <span aria-hidden="true">↓</span></a
-    >
+    <a class="archive-gate__scroll" href="#manifiesto">
+      <span data-i18n="home.open">{translations.es["home.open"]}</span>
+      <span aria-hidden="true">↓</span>
+    </a>
   </section>
 
   <section id="manifiesto" class="archive-statement reveal">
     <div class="archive-statement__meta">
-      <span>Nota del editor / 001</span>
+      <span data-i18n="home.editorNote"
+        >{translations.es["home.editorNote"]}</span
+      >
       <span>Luis Eduardo Barrón Álvarez</span>
     </div>
-    <blockquote>
-      Un registro de las canciones que dieron forma al tiempo, y de los
-      recuerdos que ahora viven dentro de ellas.
+    <blockquote data-i18n="home.manifestoQuote">
+      {translations.es["home.manifestoQuote"]}
     </blockquote>
-    <p>
-      Blonded Visual Archive reúne obras, imágenes y transmisiones desde una
-      mirada personal. No es una cronología definitiva: es una colección en
-      proceso.
+    <p data-i18n="home.manifestoBody">
+      {translations.es["home.manifestoBody"]}
     </p>
   </section>
 
   <section class="era-index" aria-labelledby="era-index-title">
     <header class="era-index__header">
-      <p class="archive-label">Índice cromático / cinco registros</p>
-      <h2 id="era-index-title">Eras en archivo</h2>
+      <p class="archive-label" data-i18n="home.eraLabel">
+        {translations.es["home.eraLabel"]}
+      </p>
+      <h2 id="era-index-title" data-i18n="home.eraTitle">
+        {translations.es["home.eraTitle"]}
+      </h2>
     </header>
     <ol>
       {
-        archiveEras.map((era, index) => (
-          <li data-era={era.theme} class="reveal">
-            <a href={`/discografia#${era.slug}`}>
-              <span class="era-index__number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span class="era-index__name">{era.title}</span>
-              <span class="era-index__year">{era.year}</span>
-              <span class="era-index__arrow" aria-hidden="true">
-                ↗
-              </span>
-            </a>
-          </li>
-        ))
+        archiveEras.map((era, index) => {
+          const titleKey = `era.${era.slug}.title`;
+          return (
+            <li data-era={era.theme} class="reveal">
+              <a href={`/discografia#${era.slug}`}>
+                <span class="era-index__number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span class="era-index__name" data-i18n={titleKey}>
+                  {translations.es[titleKey]}
+                </span>
+                <span class="era-index__year">{era.year}</span>
+                <span class="era-index__arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            </li>
+          );
+        })
       }
     </ol>
   </section>
 
   <section class="transmission reveal" aria-labelledby="transmission-title">
     <div class="transmission__copy">
-      <p class="archive-label">Selected transmission / 09:53</p>
+      <p class="archive-label" data-i18n="home.transmissionLabel">
+        {translations.es["home.transmissionLabel"]}
+      </p>
       <h2 id="transmission-title">Pyramids</h2>
-      <p>
-        Del mito a Las Vegas en dos movimientos. Una pieza donde producción,
-        personaje y tiempo cambian de forma sin romper la narración.
+      <p data-i18n="home.transmissionBody">
+        {translations.es["home.transmissionBody"]}
       </p>
       <a
         class="archive-link archive-link--light"
@@ -85,19 +105,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         target="_blank"
         rel="noopener noreferrer"
       >
-        Ver transmisión <span aria-hidden="true">↗</span>
+        <span data-i18n="home.transmissionLink">
+          {translations.es["home.transmissionLink"]}
+        </span>
+        <span aria-hidden="true">↗</span>
       </a>
     </div>
     <div class="transmission__frame">
       <iframe
         src="https://www.youtube-nocookie.com/embed/dMV31MWIjLE"
-        title="Frank Ocean — Pyramids, video musical"
+        title={translations.es["home.iframeTitle"]}
+        data-i18n-title="home.iframeTitle"
         loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
     </div>
-    <p class="transmission__caption">
-      Channel Orange / 2012 / Def Jam Recordings
+    <p class="transmission__caption" data-i18n="home.transmissionCaption">
+      {translations.es["home.transmissionCaption"]}
     </p>
   </section>
 </BaseLayout>

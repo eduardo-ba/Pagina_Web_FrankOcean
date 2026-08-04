@@ -1,14 +1,16 @@
 ---
+import { translations } from "../data/i18n";
+
 interface Props {
   currentPath: string;
 }
 
 const { currentPath } = Astro.props;
 const links = [
-  { href: "/", index: "01", label: "Portada" },
-  { href: "/discografia", index: "02", label: "Archivo" },
-  { href: "/biografia", index: "03", label: "Historia" },
-  { href: "/contacto", index: "04", label: "Créditos" },
+  { href: "/", index: "01", key: "nav.cover" },
+  { href: "/discografia", index: "02", key: "nav.archive" },
+  { href: "/biografia", index: "03", key: "nav.history" },
+  { href: "/contacto", index: "04", key: "nav.credits" },
 ];
 const isCurrent = (href: string) =>
   href === "/" ? currentPath === href : currentPath.startsWith(href);
@@ -18,23 +20,40 @@ const isCurrent = (href: string) =>
   <a
     class="archive-brand"
     href="/"
-    aria-label="Blonded Visual Archive, ir a portada"
+    aria-label={translations.es["global.brandHome"]}
+    data-i18n-aria-label="global.brandHome"
   >
     <span aria-hidden="true">BVA</span>
-    <span class="archive-brand__long">Blonded Visual Archive</span>
+    <span class="archive-brand__long" data-i18n="brand.name"
+      >{translations.es["brand.name"]}</span
+    >
   </a>
 
-  <nav aria-label="Navegación del archivo">
+  <nav
+    aria-label={translations.es["global.navAria"]}
+    data-i18n-aria-label="global.navAria"
+  >
     <ul class="archive-nav">
       {
-        links.map(({ href, index, label }) => (
+        links.map(({ href, index, key }) => (
           <li>
             <a href={href} aria-current={isCurrent(href) ? "page" : undefined}>
-              <span>{index} /</span> {label}
+              <span>{index} /</span>{" "}
+              <span data-i18n={key}>{translations.es[key]}</span>
             </a>
           </li>
         ))
       }
     </ul>
   </nav>
+
+  <div
+    class="brand-language"
+    role="group"
+    aria-label={translations.es["global.languageAria"]}
+    data-i18n-aria-label="global.languageAria"
+  >
+    <button type="button" data-language="es" aria-pressed="true">ES</button>
+    <button type="button" data-language="en" aria-pressed="false">EN</button>
+  </div>
 </header>

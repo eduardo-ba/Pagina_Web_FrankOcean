@@ -2,41 +2,48 @@
 import EditorialIntro from "../components/EditorialIntro.astro";
 import EraChapter from "../components/EraChapter.astro";
 import { archiveEras } from "../data/albums";
+import { translations } from "../data/i18n";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-  title="Archivo"
-  description="Cinco capítulos visuales recorren los proyectos, eras y transmisiones de Frank Ocean."
->
+<BaseLayout metaKey="archive">
   <EditorialIntro
-    index="02 / 05 registros"
-    eyebrow="Discografía como secuencia editorial"
-    title="The archive is the story."
-    description="Cinco registros, ordenados por temperatura y memoria. Cada obra abre un lenguaje visual propio dentro de una misma colección."
+    indexKey="archive.introIndex"
+    eyebrowKey="archive.introEyebrow"
+    titleKey="archive.introTitle"
+    descriptionKey="archive.introDescription"
   />
 
-  <nav class="chapter-nav" aria-label="Saltar a una era">
+  <nav
+    class="chapter-nav"
+    aria-label={translations.es["archive.chapterNavAria"]}
+    data-i18n-aria-label="archive.chapterNavAria"
+  >
     {
-      archiveEras.map((era, index) => (
-        <a href={`#${era.slug}`}>
-          <span>{String(index + 1).padStart(2, "0")}</span> {era.title}
-        </a>
-      ))
+      archiveEras.map((era, index) => {
+        const titleKey = `era.${era.slug}.title`;
+        return (
+          <a href={`#${era.slug}`}>
+            <span>{String(index + 1).padStart(2, "0")}</span>{" "}
+            <span data-i18n={titleKey}>{translations.es[titleKey]}</span>
+          </a>
+        );
+      })
     }
   </nav>
 
-  <section class="era-sequence" aria-label="Proyectos por era">
+  <section
+    class="era-sequence"
+    aria-label={translations.es["archive.sequenceAria"]}
+    data-i18n-aria-label="archive.sequenceAria"
+  >
     {archiveEras.map((era, index) => <EraChapter era={era} index={index} />)}
   </section>
 
   <aside class="asset-note">
-    <p class="archive-label">Nota de inventario / media</p>
-    <p>
-      Esta edición utiliza las ocho imágenes locales disponibles. Para una
-      siguiente versión conviene sumar fotografías panorámicas acreditadas de
-      cada era y fotogramas propios para ampliar la narrativa sin repetir
-      portadas.
+    <p class="archive-label" data-i18n="archive.assetLabel">
+      {translations.es["archive.assetLabel"]}
     </p>
+    <p data-i18n="archive.assetBody">{translations.es["archive.assetBody"]}</p>
   </aside>
 </BaseLayout>

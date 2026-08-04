@@ -1,4 +1,6 @@
 ---
+import { translations } from "../data/i18n";
+
 const year = new Date().getFullYear();
 ---
 
@@ -6,13 +8,28 @@ const year = new Date().getFullYear();
   <div class="archive-footer__title" aria-hidden="true">BVA</div>
   <div class="archive-footer__grid">
     <p>
-      <strong>Blonded Visual Archive</strong><br />Colección digital en español
+      <strong data-i18n="brand.name">{translations.es["brand.name"]}</strong><br
+      />
+      <span data-i18n="footer.collection"
+        >{translations.es["footer.collection"]}</span
+      >
     </p>
     <p>
-      Archivo no oficial, personal y no comercial.<br />Sin afiliación con el
-      artista.
+      <span data-i18n="footer.noticePrimary"
+        >{translations.es["footer.noticePrimary"]}</span
+      ><br />
+      <span data-i18n="footer.noticeSecondary"
+        >{translations.es["footer.noticeSecondary"]}</span
+      >
     </p>
-    <p>Luis Eduardo Barrón Álvarez<br />Archivo 01 / {year}</p>
-    <a href="#inicio">Volver arriba <span aria-hidden="true">↑</span></a>
+    <p>
+      Luis Eduardo Barrón Álvarez<br />
+      <span data-i18n="footer.archive">{translations.es["footer.archive"]}</span
+      > / {year}
+    </p>
+    <a href="#inicio">
+      <span data-i18n="footer.back">{translations.es["footer.back"]}</span>
+      <span aria-hidden="true">↑</span>
+    </a>
   </div>
 </footer>

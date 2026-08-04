@@ -1,5 +1,6 @@
 ---
 import type { ArchiveEra } from "../data/albums";
+import { translations } from "../data/i18n";
 import MediaFigure from "./MediaFigure.astro";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 
 const { era, index } = Astro.props;
 const label = String(index + 1).padStart(2, "0");
+const eraKey = `era.${era.slug}`;
 ---
 
 <article
@@ -19,24 +21,36 @@ const label = String(index + 1).padStart(2, "0");
   <div class="era-chapter__number" aria-hidden="true">{label}</div>
   <MediaFigure
     src={era.cover}
-    alt={era.alt}
-    caption={`${era.year} / ${era.category}`}
+    altKey={`${eraKey}.alt`}
+    captionKey={`${eraKey}.caption`}
     class="era-chapter__image"
     sizes="(min-width: 900px) 58vw, 100vw"
   />
   <div class="era-chapter__copy">
-    <p class="archive-label">{era.category}</p>
-    <h2>{era.title}</h2>
+    <p class="archive-label" data-i18n={`${eraKey}.category`}>
+      {translations.es[`${eraKey}.category`]}
+    </p>
+    <h2 data-i18n={`${eraKey}.title`}>{translations.es[`${eraKey}.title`]}</h2>
     <p class="era-chapter__year">{era.year}</p>
-    <p class="era-chapter__description">{era.description}</p>
-    <p class="era-chapter__track"><span>Selección</span>{era.featuredTrack}</p>
+    <p class="era-chapter__description" data-i18n={`${eraKey}.description`}>
+      {translations.es[`${eraKey}.description`]}
+    </p>
+    <p class="era-chapter__track">
+      <span data-i18n="common.selection"
+        >{translations.es["common.selection"]}</span
+      >
+      {era.featuredTrack}
+    </p>
     <a
       class="archive-link"
       href={era.url}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Escuchar / {era.platform}
+      <span>
+        <span data-i18n="common.listen">{translations.es["common.listen"]}</span
+        > / {era.platform}
+      </span>
       <span aria-hidden="true">↗</span>
     </a>
   </div>

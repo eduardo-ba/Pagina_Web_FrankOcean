@@ -1,50 +1,142 @@
 ---
 import ArchiveFooter from "../components/ArchiveFooter.astro";
 import ArchiveHeader from "../components/ArchiveHeader.astro";
+import { translations } from "../data/i18n";
 import "../styles/global.css";
 
 interface Props {
-  title: string;
-  description: string;
+  metaKey: "home" | "archive" | "history" | "credits";
   pageTheme?: "paper" | "black";
 }
 
-const { title, description, pageTheme = "paper" } = Astro.props;
-const pageTitle =
-  title === "Portada"
-    ? "Blonded Visual Archive"
-    : `${title} — Blonded Visual Archive`;
+const { metaKey, pageTheme = "paper" } = Astro.props;
+const titleKey = `meta.${metaKey}.title`;
+const descriptionKey = `meta.${metaKey}.description`;
 const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
-<html lang="es" data-page-theme={pageTheme}>
+<html lang="es" data-page-theme={pageTheme} data-language="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
+    <meta name="description" content={translations.es[descriptionKey]} />
     <meta
       name="theme-color"
       content={pageTheme === "black" ? "#090908" : "#f0eddf"}
     />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={translations.es[titleKey]} />
+    <meta property="og:description" content={translations.es[descriptionKey]} />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/imagenes/portada-artistica.jpg" />
+    <script is:inline>
+      try {
+        const storedLanguage =
+          localStorage.getItem("bva-language") ??
+          localStorage.getItem("bva-brand-language");
+        document.documentElement.dataset.language =
+          storedLanguage === "en" ? "en" : "es";
+        document.documentElement.lang = storedLanguage === "en" ? "en" : "es";
+      } catch {
+        document.documentElement.dataset.language = "es";
+      }
+    </script>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23090908%22/><text x=%2250%22 y=%2263%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2239%22 font-weight=%22900%22 fill=%22%23B7F34A%22>BVA</text></svg>"
     />
-    <title>{pageTitle}</title>
+    <title>{translations.es[titleKey]}</title>
   </head>
-  <body id="inicio">
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <body
+    id="inicio"
+    data-title-key={titleKey}
+    data-description-key={descriptionKey}
+  >
+    <a class="skip-link" href="#contenido" data-i18n="global.skip"
+      >{translations.es["global.skip"]}</a
+    >
     <ArchiveHeader currentPath={currentPath} />
     <main id="contenido">
       <slot />
     </main>
     <ArchiveFooter />
     <script>
+      import { translations, type Language } from "../data/i18n";
+
+      const applyLanguage = (language: Language) => {
+        const copy = translations[language];
+        document.documentElement.dataset.language = language;
+        document.documentElement.lang = language;
+
+        document
+          .querySelectorAll<HTMLElement>("[data-i18n]")
+          .forEach((element) => {
+            const key = element.dataset.i18n;
+            if (key && copy[key]) element.textContent = copy[key];
+          });
+
+        const translatedAttributes = [
+          ["data-i18n-alt", "alt"],
+          ["data-i18n-aria-label", "aria-label"],
+          ["data-i18n-title", "title"],
+        ] as const;
+
+        translatedAttributes.forEach(([keyAttribute, targetAttribute]) => {
+          document
+            .querySelectorAll<HTMLElement>(`[${keyAttribute}]`)
+            .forEach((element) => {
+              const key = element.getAttribute(keyAttribute);
+              if (key && copy[key])
+                element.setAttribute(targetAttribute, copy[key]);
+            });
+        });
+
+        document
+          .querySelectorAll<HTMLButtonElement>("[data-language]")
+          .forEach((button) => {
+            button.setAttribute(
+              "aria-pressed",
+              String(button.dataset.language === language),
+            );
+          });
+
+        const titleKey = document.body.dataset.titleKey;
+        const descriptionKey = document.body.dataset.descriptionKey;
+        if (titleKey && copy[titleKey]) {
+          document.title = copy[titleKey];
+          document
+            .querySelector<HTMLMetaElement>('meta[property="og:title"]')
+            ?.setAttribute("content", copy[titleKey]);
+        }
+        if (descriptionKey && copy[descriptionKey]) {
+          document
+            .querySelector<HTMLMetaElement>('meta[name="description"]')
+            ?.setAttribute("content", copy[descriptionKey]);
+          document
+            .querySelector<HTMLMetaElement>('meta[property="og:description"]')
+            ?.setAttribute("content", copy[descriptionKey]);
+        }
+      };
+
+      const initialLanguage: Language =
+        document.documentElement.dataset.language === "en" ? "en" : "es";
+      applyLanguage(initialLanguage);
+
+      document
+        .querySelectorAll<HTMLButtonElement>("[data-language]")
+        .forEach((button) => {
+          button.addEventListener("click", () => {
+            const language: Language =
+              button.dataset.language === "en" ? "en" : "es";
+            applyLanguage(language);
+            try {
+              localStorage.setItem("bva-language", language);
+            } catch {
+              // La selección sigue activa durante la visita actual.
+            }
+          });
+        });
+
       const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
