@@ -30,6 +30,8 @@ export const translations: Record<Language, Record<string, string>> = {
     "meta.credits.title": "Créditos — Archivo Visual Blonded",
     "meta.credits.description":
       "Colofón, intención, créditos y enlaces del Archivo Visual Blonded.",
+    "meta.socialImageAlt":
+      "Archivo Visual Blonded — archivo visual no oficial sobre las eras de Frank Ocean",
     "home.heroAlt": "Collage editorial inspirado en la era Blonde",
     "home.heroMeta": "Archivo personal no oficial",
     "home.heroPresent": "2011—presente / ES",
@@ -201,6 +203,8 @@ export const translations: Record<Language, Record<string, string>> = {
     "meta.credits.title": "Credits — Blonded Visual Archive",
     "meta.credits.description":
       "Colophon, intent, credits, and links for Blonded Visual Archive.",
+    "meta.socialImageAlt":
+      "Blonded Visual Archive — an unofficial visual archive of Frank Ocean's eras",
     "home.heroAlt": "Editorial collage inspired by the Blonde era",
     "home.heroMeta": "Unofficial personal archive",
     "home.heroPresent": "2011—present / EN",

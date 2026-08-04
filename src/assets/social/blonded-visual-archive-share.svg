@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#090908" />
+  <path d="M0 88h1200M0 542h1200M850 0v630" stroke="#f0eddf" stroke-opacity=".22" />
+  <rect x="48" y="35" width="86" height="42" fill="#b7f34a" />
+  <text x="91" y="64" fill="#090908" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900" text-anchor="middle">BVA</text>
+  <text x="162" y="62" fill="#f0eddf" font-family="Courier New, monospace" font-size="15" font-weight="700" letter-spacing="2">DIGITAL COLLECTION / 01</text>
+
+  <text x="47" y="246" fill="#f8f5e9" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="136" font-weight="900" letter-spacing="-9">BLONDED</text>
+  <text x="47" y="370" fill="#b7f34a" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="136" font-weight="900" letter-spacing="-9">VISUAL</text>
+  <text x="47" y="494" fill="#f8f5e9" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="136" font-weight="900" letter-spacing="-9">ARCHIVE</text>
+
+  <rect x="850" y="88" width="350" height="454" fill="#ff6b18" />
+  <text x="892" y="162" fill="#090908" font-family="Courier New, monospace" font-size="15" font-weight="700" letter-spacing="2">UNOFFICIAL</text>
+  <text x="892" y="190" fill="#090908" font-family="Courier New, monospace" font-size="15" font-weight="700" letter-spacing="2">PERSONAL ARCHIVE</text>
+  <text x="892" y="218" fill="#090908" font-family="Courier New, monospace" font-size="15" font-weight="700" letter-spacing="2">2011—PRESENT</text>
+  <text x="882" y="487" fill="#090908" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="230" font-weight="900" letter-spacing="-20">01</text>
+
+  <text x="48" y="586" fill="#c8c8c1" font-family="Courier New, monospace" font-size="15" font-weight="700" letter-spacing="1.5">FRANK OCEAN / ERAS / SOUND / MEMORY</text>
+  <text x="1152" y="586" fill="#f8f5e9" font-family="Courier New, monospace" font-size="14" font-weight="700" letter-spacing="1" text-anchor="end">FRANKOCENANPAGE.NETLIFY.APP</text>
+</svg>
