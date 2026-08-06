@@ -18,6 +18,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     {
       editions.map((edition, index) => (
         <article
+          id={`edition-${edition.number}`}
           class:list={[
             "edition-entry",
             index === editions.length - 1 && "edition-entry--current",
@@ -52,10 +53,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
   </section>
 
-  <a class="edition-exit" href="/explorar">
-    <span data-i18n="editions.openExplore">
-      {translations.es["editions.openExplore"]}
-    </span>
-    <span aria-hidden="true">→</span>
-  </a>
+  <div class="edition-actions">
+    <a class="edition-exit" href="/explorar">
+      <span data-i18n="editions.openExplore">
+        {translations.es["editions.openExplore"]}
+      </span>
+      <span aria-hidden="true">→</span>
+    </a>
+    <a class="edition-exit edition-exit--rss" href="/ediciones.xml">
+      <span data-i18n="editions.rssLabel">
+        {translations.es["editions.rssLabel"]}
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
 </BaseLayout>

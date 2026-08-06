@@ -327,10 +327,42 @@
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
 }
 
 .chapter-nav a span {
   color: var(--green);
+}
+
+.chapter-nav a[aria-current="true"] {
+  background: var(--green);
+  color: var(--black);
+}
+
+.chapter-nav a[aria-current="true"] span {
+  color: var(--black);
+}
+
+.chapter-nav__year {
+  color: var(--gray) !important;
+  font-size: 0.9em;
+}
+
+.chapter-nav a[aria-current="true"] .chapter-nav__year {
+  color: rgb(9 9 8 / 55%) !important;
+}
+
+.chapter-nav__progress {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--green);
+  transition: width 0.1s linear;
 }
 
 .era-chapter {

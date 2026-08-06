@@ -920,6 +920,18 @@
   text-decoration: none;
 }
 
+.edition-exit--rss {
+  min-height: unset;
+  padding: clamp(1.5rem, 3vw, 2.5rem) var(--gutter);
+  background: var(--black);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: var(--copy);
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 1.2;
+}
+
 @media (max-width: 900px) {
   .era-record__hero,
   .era-reading,

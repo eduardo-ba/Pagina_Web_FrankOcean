@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/eduardo-ba/Pagina_Web_FrankOcean#readme",
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.6"
   },
   "devDependencies": {

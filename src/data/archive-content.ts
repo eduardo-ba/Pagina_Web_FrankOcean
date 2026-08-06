@@ -507,6 +507,7 @@ export const editions = [
   {
     number: "01",
     year: "2026",
+    date: "2026-07-29",
     status: { es: "Edición fundacional", en: "Foundational edition" },
     description: {
       es: "Rediseño editorial, archivo por eras, historia, fotografía acreditada y sistema bilingüe.",
@@ -516,6 +517,7 @@ export const editions = [
   {
     number: "02",
     year: "2026",
+    date: "2026-08-04",
     status: { es: "Edición actual", en: "Current edition" },
     description: {
       es: "Radio, objetos, índice emocional, búsqueda, modo de escucha, transmisiones aleatorias y deep links por era.",

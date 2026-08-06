@@ -16,6 +16,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <nav
     class="chapter-nav"
+    data-chapter-nav
     aria-label={translations.es["archive.chapterNavAria"]}
     data-i18n-aria-label="archive.chapterNavAria"
   >
@@ -23,13 +24,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       archiveEras.map((era, index) => {
         const titleKey = `era.${era.slug}.title`;
         return (
-          <a href={`#${era.slug}`}>
+          <a href={`#${era.slug}`} data-chapter-target={era.slug}>
             <span>{String(index + 1).padStart(2, "0")}</span>{" "}
-            <span data-i18n={titleKey}>{translations.es[titleKey]}</span>
+            <span data-i18n={titleKey}>{translations.es[titleKey]}</span>{" "}
+            <span class="chapter-nav__year">{era.year}</span>
           </a>
         );
       })
     }
+    <div class="chapter-nav__progress" data-chapter-progress aria-hidden="true">
+    </div>
   </nav>
 
   <section
@@ -39,6 +43,61 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   >
     {archiveEras.map((era, index) => <EraChapter era={era} index={index} />)}
   </section>
+
+  <script>
+    const nav = document.querySelector<HTMLElement>("[data-chapter-nav]");
+    const links = document.querySelectorAll<HTMLAnchorElement>(
+      "[data-chapter-target]",
+    );
+    const progress = document.querySelector<HTMLElement>(
+      "[data-chapter-progress]",
+    );
+    const chapters = document.querySelectorAll<HTMLElement>(".era-chapter");
+
+    const setActive = (slug: string | undefined) => {
+      links.forEach((link) => {
+        const isActive = link.dataset.chapterTarget === slug;
+        link.setAttribute("aria-current", isActive ? "true" : "false");
+        if (isActive) {
+          link.scrollIntoView({
+            behavior: "smooth",
+            inline: "center",
+            block: "nearest",
+          });
+        }
+      });
+    };
+
+    if (chapters.length && nav) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible) setActive(visible.target.id);
+        },
+        {
+          rootMargin: `-${nav.offsetHeight}px 0px -60% 0px`,
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+        },
+      );
+      chapters.forEach((chapter) => observer.observe(chapter));
+    }
+
+    const sequence = document.querySelector<HTMLElement>(".era-sequence");
+    const updateProgress = () => {
+      if (!sequence || !progress) return;
+      const rect = sequence.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const traveled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      const ratio = total > 0 ? traveled / total : 0;
+      progress.style.width = `${Math.round(ratio * 100)}%`;
+    };
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
+  </script>
 
   <aside class="asset-note">
     <p class="archive-label" data-i18n="archive.assetLabel">
