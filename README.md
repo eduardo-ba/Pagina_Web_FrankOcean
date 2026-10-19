@@ -7,7 +7,7 @@ La Edición 02 amplía el archivo con fichas individuales por era, el índice de
 ## Desarrollo
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -56,3 +56,15 @@ Las imágenes se almacenan en `src/assets/images` y se sirven mediante `astro:as
 - Kallerna, _Frank Ocean / Flow Festival 2017_ — CC BY-SA 4.0.
 
 Las fichas originales y los enlaces de licencia también están disponibles en la ruta de créditos del sitio.
+
+## Entorno reproducible
+
+Usa una versión de Node.js compatible con Astro (`>=22.12.0` según el lockfile) y ejecuta `npm ci` para instalar las versiones de `package-lock.json`. Conserva el lockfile en los commits que cambien dependencias.
+
+## Contribuir y organizar commits
+
+Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para crear ramas, escribir commits y verificar los cambios antes de abrir un pull request.
+
+## Verificación automática
+
+El workflow [Build](.github/workflows/build.yml) compila el proyecto en cada pull request y cada actualización de `main`. También puede ejecutarse manualmente desde la pestaña Actions.
